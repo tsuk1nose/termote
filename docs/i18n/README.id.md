@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -36,10 +36,10 @@ Kendalikan alat CLI (Claude Code, Codex, OpenCode, terminal apa pun) dari jarak 
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md)
+> 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="Tonton Termote dalam semenit (video)" width="720" /></a>
+  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="Tonton Termote dalam semenit (video)" width="720" /></a>
 </p>
 
 ## Fitur
@@ -143,11 +143,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-termote mengalirkan terminal sendiri (PTY di Unix, ConPTY di Windows) ke xterm.js di PWA; tidak ada lagi proses terminal terpisah yang perlu di-proxy. Model lengkap penjagaan request ada di [`docs/system-architecture.md`](docs/system-architecture.md).
+termote mengalirkan terminal sendiri (PTY di Unix, ConPTY di Windows) ke xterm.js di PWA; tidak ada lagi proses terminal terpisah yang perlu di-proxy. Model lengkap penjagaan request ada di [`docs/system-architecture.md`](../system-architecture.md).
 
 ## Mulai Cepat
 
-> 📖 **Baru mengenal Termote?** Lihat [Panduan Memulai](docs/getting-started.md) untuk panduan lengkap beserta contoh.
+> 📖 **Baru mengenal Termote?** Lihat [Panduan Memulai](../getting-started.md) untuk panduan lengkap beserta contoh.
 
 **Linux / macOS:**
 
@@ -222,7 +222,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Tanpa `TERMOTE_VERSION`, installer mengambil rilis stabil terbaru (1.0 atau lebih baru) dan tidak mengubah instalasi yang sudah ada. Dengan variabel itu, versi tersebut dipasang di samping versi saat ini dan menjadi versi aktif, sekaligus cara untuk memperbaiki instalasi yang rusak. Pre-release (`X.Y.Z-rc.N`) hanya dipasang bila disebut dengan cara ini (atau dengan `termote update --version`), dan hanya setelah diterbitkan; lihat [Deployment Guide](docs/deployment-guide.md#pre-releases).
+Tanpa `TERMOTE_VERSION`, installer mengambil rilis stabil terbaru (1.0 atau lebih baru) dan tidak mengubah instalasi yang sudah ada. Dengan variabel itu, versi tersebut dipasang di samping versi saat ini dan menjadi versi aktif, sekaligus cara untuk memperbaiki instalasi yang rusak. Pre-release (`X.Y.Z-rc.N`) hanya dipasang bila disebut dengan cara ini (atau dengan `termote update --version`), dan hanya setelah diterbitkan; lihat [Deployment Guide](../deployment-guide.md#pre-releases).
 
 ### Mode Container
 
@@ -419,7 +419,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**Pengujian Manual:** Lihat [Self-Test Checklist](docs/self-test-checklist.md)
+**Pengujian Manual:** Lihat [Self-Test Checklist](../self-test-checklist.md)
 
 ## Pemecahan Masalah
 
@@ -460,7 +460,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **File service tidak menyimpan rahasia**: unit systemd, agent launchd, dan Scheduled Task tidak pernah berisi password
 - Gunakan HTTPS (Tailscale) untuk produksi
 - Batasi ke jaringan tepercaya/VPN
-- Apa yang bisa dilakukan perangkat yang masuk atau dipasangkan, dan apa yang harus dilakukan jika perangkat hilang: [Model keamanan](docs/security-model.md)
+- Apa yang bisa dilakukan perangkat yang masuk atau dipasangkan, dan apa yang harus dilakukan jika perangkat hilang: [Model keamanan](../security-model.md)
 
 ## Proyek Lainnya
 

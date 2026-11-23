@@ -104,6 +104,17 @@ func (c *cli) serviceEnv() map[string]string {
 			env[k] = v
 		}
 	}
+	if c.goos != "windows" {
+		lang, hasLang := env["LANG"]
+		lcAll := env["LC_ALL"]
+		isUTF8 := func(s string) bool {
+			l := strings.ToLower(strings.TrimSpace(s))
+			return strings.Contains(l, "utf-8") || strings.Contains(l, "utf8")
+		}
+		if hasLang && !isUTF8(lang) && !isUTF8(lcAll) {
+			env["LANG"] = "C.UTF-8"
+		}
+	}
 	return env
 }
 
@@ -258,15 +269,19 @@ func (c *cli) serverLog() string { return filepath.Join(c.stateDir(), "termote.l
 // connects rather than binds: macOS lets 127.0.0.1 bind while an old server
 // still holds 0.0.0.0.
 func (c *cli) waitStopped(port int, timeout time.Duration) error {
+	return c.waitStoppedAddr(net.JoinHostPort("127.0.0.1", strconv.Itoa(port)), timeout)
+}
+
+func (c *cli) waitStoppedAddr(addr string, timeout time.Duration) error {
 	deadline := time.Now().Add(timeout)
 	for {
-		conn, err := net.DialTimeout("tcp", net.JoinHostPort("127.0.0.1", strconv.Itoa(port)), 200*time.Millisecond)
+		conn, err := net.DialTimeout("tcp", addr, 200*time.Millisecond)
 		if err != nil {
 			return nil
 		}
 		conn.Close()
 		if time.Now().After(deadline) {
-			return errors.New("port " + strconv.Itoa(port) + " is still in use after stopping the server")
+			return errors.New("address " + addr + " is still in use after stopping the server")
 		}
 		time.Sleep(100 * time.Millisecond)
 	}

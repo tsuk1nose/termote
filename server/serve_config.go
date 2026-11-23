@@ -17,7 +17,19 @@ func serveConfigFromSaved(s savedConfig, defaultPort int) serveConfig {
 		port = defaultPort
 	}
 	bind := "127.0.0.1"
-	if s.LAN {
+	var bindAddrs []string
+	allowLocalAddr := s.LAN
+	if len(s.Binds) > 0 {
+		bindAddrs = resolveBindAddrs(s.Binds, s.LAN, port)
+		if len(bindAddrs) == 1 {
+			bind = bindHost(bindAddrs[0])
+		} else {
+			bind = strings.Join(bindAddrs, ",")
+		}
+		if hasNonLoopbackBind(bindAddrs) {
+			allowLocalAddr = true
+		}
+	} else if s.LAN {
 		bind = "0.0.0.0"
 	}
 	mux := s.Mux
@@ -39,8 +51,9 @@ func serveConfigFromSaved(s savedConfig, defaultPort int) serveConfig {
 		Pass:             s.Password,
 		NoAuth:           s.NoAuth,
 		Bind:             bind,
+		BindAddrs:        bindAddrs,
 		AllowedHosts:     strings.Join(hosts, ","),
-		AllowLocalAddr:   s.LAN,
+		AllowLocalAddr:   allowLocalAddr,
 		MuxBackend:       mux,
 		HerdrAllowNoAuth: s.HerdrAllowNoAuth,
 		HcAllowNoAuth:    s.HcAllowNoAuth,

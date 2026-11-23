@@ -277,6 +277,9 @@ func startTmuxTerminal(argv []string, size Size) (TermStream, error) {
 // the user may also attach to, and marks the command as termote's, so the
 // reaper never mistakes a user's own "tmux attach -t x" for an orphan.
 func tmuxAttachArgv(session string) []string {
+	if runtime.GOOS != "windows" {
+		return tmuxArgv("-u", "attach", "-E", "-t", session)
+	}
 	return tmuxArgv("attach", "-E", "-t", session)
 }
 
@@ -284,6 +287,9 @@ func tmuxAttachArgv(session string) []string {
 // read-only plus ignore-size, so the client neither types into the session
 // nor changes its windows' size.
 func tmuxViewAttachArgv(session string) []string {
+	if runtime.GOOS != "windows" {
+		return tmuxArgv("-u", "attach", "-E", "-r", "-t", session)
+	}
 	return tmuxArgv("attach", "-E", "-r", "-t", session)
 }
 
@@ -295,15 +301,23 @@ func isTmuxAttachCmdline(cmdline string) bool {
 	if cmdline == strings.Join(tmuxArgv("attach", "-t", tmuxSession), " ") {
 		return true
 	}
-	for _, argv := range [][]string{tmuxAttachArgv(defaultSessionTarget()), tmuxViewAttachArgv(defaultSessionTarget())} {
+	for _, argv := range [][]string{
+		tmuxAttachArgv(defaultSessionTarget()),
+		tmuxViewAttachArgv(defaultSessionTarget()),
+		tmuxArgv("attach", "-E", "-t", defaultSessionTarget()),
+		tmuxArgv("attach", "-E", "-r", "-t", defaultSessionTarget()),
+	} {
 		if cmdline == strings.Join(argv, " ") {
 			return true
 		}
 	}
-	for _, flags := range [][]string{{"-E"}, {"-E", "-r"}} {
-		prefix := strings.Join(tmuxArgv(append(append([]string{"attach"}, flags...), "-t")...), " ") + " "
-		if rest, ok := strings.CutPrefix(cmdline, prefix); ok && tmuxSessionIDRe.MatchString(rest) {
-			return true
+	for _, base := range [][]string{{"attach"}, {"-u", "attach"}} {
+		for _, flags := range [][]string{{"-E"}, {"-E", "-r"}} {
+			args := append(append(slices.Clone(base), flags...), "-t")
+			prefix := strings.Join(tmuxArgv(args...), " ") + " "
+			if rest, ok := strings.CutPrefix(cmdline, prefix); ok && tmuxSessionIDRe.MatchString(rest) {
+				return true
+			}
 		}
 	}
 	return false

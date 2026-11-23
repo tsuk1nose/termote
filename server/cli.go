@@ -525,6 +525,8 @@ Commands:
 Options of start (saved; a flag not given keeps its saved value):
   --port <port>              Port (default: %d)
   --lan[=false]              Listen on every interface, not only this machine
+  --bind <ip[:port]>         Listen only on specific address(es) (repeatable or comma-separated)
+  --clear-bind               Clear saved --bind addresses and use --lan/localhost instead
   --tailscale <host[:port]>  Publish over Tailscale HTTPS (default port 443)
   --no-tailscale             Stop publishing over Tailscale
   --cloudflare <host>        Allow the public hostname of a Cloudflare Tunnel you run

@@ -28,6 +28,7 @@ import (
 // password is shared by both.
 type savedConfig struct {
 	LAN       bool
+	Binds     []string // explicit listen addresses (host[:port]), overrides LAN when non-empty
 	NoAuth    bool
 	Port      int
 	Tailscale string
@@ -205,6 +206,7 @@ func (c *cli) ensureSecret() (string, error) {
 // Unix format: KEY="value" lines, parsed without sourcing.
 const (
 	keyLAN              = "TERMOTE_LAN"
+	keyBind             = "TERMOTE_BIND"
 	keyNoAuth           = "TERMOTE_NO_AUTH"
 	keyPort             = "TERMOTE_PORT"
 	keyTailscale        = "TERMOTE_TAILSCALE"
@@ -257,6 +259,7 @@ func parseUnixConfig(data []byte, key func() string) (*savedConfig, error) {
 	}
 	cfg := &savedConfig{
 		LAN:               kv[keyLAN] == "true",
+		Binds:             splitHosts(kv[keyBind]),
 		NoAuth:            kv[keyNoAuth] == "true",
 		Tailscale:         kv[keyTailscale],
 		Cloudflare:        kv[keyCloudflare],
@@ -308,7 +311,7 @@ func formatUnixConfig(cfg savedConfig, key string) ([]byte, error) {
 		}
 		mac = passwordMAC(enc, key)
 	}
-	values := []string{cfg.Tailscale, cfg.Cloudflare, cfg.ProxyClientHeader, cfg.Mux, strings.Join(cfg.AllowHosts, ","), strings.Join(cfg.AllowLocalUsers, ","), cfg.User, cfg.HcBin, cfg.HcEnv.Session, cfg.HcEnv.Socket}
+	values := []string{cfg.Tailscale, cfg.Cloudflare, cfg.ProxyClientHeader, cfg.Mux, strings.Join(cfg.AllowHosts, ","), strings.Join(cfg.AllowLocalUsers, ","), strings.Join(cfg.Binds, ","), cfg.User, cfg.HcBin, cfg.HcEnv.Session, cfg.HcEnv.Socket}
 	paths := slices.Clone(cfg.AllowPaths)
 	if cc := cfg.Container; cc != nil {
 		values = append(values, cc.Tailscale, cc.Cloudflare, cc.ProxyClientHeader, strings.Join(cc.AllowHosts, ","), cc.Workspace, cc.Mux)
@@ -356,6 +359,9 @@ func formatUnixConfig(cfg savedConfig, key string) ([]byte, error) {
 	if cfg.ProxyClientHeader != "" {
 		w(keyProxyHeader, cfg.ProxyClientHeader)
 	}
+	if len(cfg.Binds) > 0 {
+		w(keyBind, strings.Join(cfg.Binds, ","))
+	}
 	if cc := cfg.Container; cc != nil {
 		w(keyContainerLAN, strconv.FormatBool(cc.LAN))
 		w(keyContainerNoAuth, strconv.FormatBool(cc.NoAuth))
@@ -382,6 +388,7 @@ func formatUnixConfig(cfg savedConfig, key string) ([]byte, error) {
 // encrypted for the current user.
 type windowsConfigFile struct {
 	Lan              bool                 `json:"Lan"`
+	Bind             []string             `json:"Bind,omitempty"`
 	NoAuth           bool                 `json:"NoAuth"`
 	Port             int                  `json:"Port"`
 	Tailscale        string               `json:"Tailscale"`
@@ -432,6 +439,7 @@ func parseWindowsConfig(data []byte) (*savedConfig, error) {
 	}
 	cfg := &savedConfig{
 		LAN:               f.Lan,
+		Binds:             f.Bind,
 		NoAuth:            f.NoAuth,
 		Port:              f.Port,
 		Tailscale:         f.Tailscale,
@@ -470,6 +478,7 @@ func parseWindowsConfig(data []byte) (*savedConfig, error) {
 func formatWindowsConfig(cfg savedConfig, now time.Time) ([]byte, error) {
 	f := windowsConfigFile{
 		Lan:              cfg.LAN,
+		Bind:             cfg.Binds,
 		NoAuth:           cfg.NoAuth,
 		Port:             cfg.Port,
 		Tailscale:        cfg.Tailscale,

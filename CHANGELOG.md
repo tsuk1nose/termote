@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.31.0-local] (2026-11-23)
+
+Synced with upstream `main` (through `v2.31.0` + `951fce49`) and reapplied local customizations:
+
+### Features
+
+* **server:** support explicit multi-address binding via `--bind <ip[:port]>` / `--clear-bind` and persisted `TERMOTE_BIND`, with Linux `IP_FREEBIND`/`IPV6_FREEBIND` so interface IPs (such as Tailscale) bind cleanly across reboots and profile switches.
+* **server:** enforce UTF-8 locale fallback (`C.UTF-8`) in `terminalEnv()` and `serviceEnv()`, and pass `-u` to `tmux attach` on Unix so terminals never fall back to ASCII (`LANG=C`).
+
+### Bug Fixes
+
+* **pwa:** fix iOS Safari/WebKit full-width punctuation input (e.g. `，。？！“”`) dropped outside IME composition while deduplicating against native `onData`.
+* **pwa:** add `interactive-widget=resizes-content` and track live `visualViewport.height` so Android Chrome + Gboard does not clip the bottom keyboard toolbar.
+* **pwa:** rebuild the xterm.js WebGL texture atlas and repaint once resize transitions settle to avoid glyph glitches on mobile GPUs.
+
+### Documentation
+
+* organize localized README translations (`README.*.md`) under `docs/i18n/` and update relative links.
+
 ## [2.31.0](https://github.com/lamngockhuong/termote/compare/v2.30.0...v2.31.0) (2026-11-21)
 
 

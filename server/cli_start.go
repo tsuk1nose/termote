@@ -24,6 +24,8 @@ import (
 // startOptions are the flags of start after merging the saved config.
 type startOptions struct {
 	lan         bool
+	binds       []string
+	clearBind   bool
 	noAuth      bool
 	fresh       bool
 	herdrNoAuth bool
@@ -61,9 +63,11 @@ var serverStartWait = 15 * time.Second
 
 func (c *cli) parseStartArgs(args []string) (startOptions, map[string]bool, error) {
 	var o startOptions
-	var hosts, remove, localUsers, removeLocalUsers, paths, removePaths stringList
+	var hosts, remove, binds, localUsers, removeLocalUsers, paths, removePaths stringList
 	fs := c.newFlagSet("start")
 	fs.BoolVar(&o.lan, "lan", false, "")
+	fs.Var(&binds, "bind", "")
+	fs.BoolVar(&o.clearBind, "clear-bind", false, "")
 	fs.BoolVar(&o.noAuth, "no-auth", false, "")
 	fs.BoolVar(&o.fresh, "fresh", false, "")
 	fs.BoolVar(&o.herdrNoAuth, "allow-herdr-no-auth", false, "")
@@ -92,9 +96,16 @@ func (c *cli) parseStartArgs(args []string) (startOptions, map[string]bool, erro
 	if set["tailscale"] && o.noTailscale {
 		return o, nil, usageError("--tailscale and --no-tailscale cannot be combined")
 	}
+	if set["bind"] && o.clearBind {
+		return o, nil, usageError("--bind and --clear-bind cannot be combined")
+	}
+	if set["bind"] && set["lan"] {
+		return o, nil, usageError("--bind and --lan cannot be combined")
+	}
 	if err := o.proxy.checkSet(set); err != nil {
 		return o, nil, err
 	}
+	o.binds = binds
 	o.allowHosts, o.removeHosts = hosts, remove
 	o.allowLocalUsers, o.removeLocalUsers = localUsers, removeLocalUsers
 	o.newLocalUsers = slices.Clone(localUsers)
@@ -116,6 +127,12 @@ func mergeSaved(o *startOptions, set map[string]bool, s *savedConfig) {
 	}
 	if !set["lan"] {
 		o.lan = s.LAN
+	}
+	switch {
+	case o.clearBind || set["lan"]:
+		o.binds = nil
+	case !set["bind"]:
+		o.binds = slices.Clone(s.Binds)
 	}
 	if !set["no-auth"] {
 		o.noAuth = s.NoAuth
@@ -170,6 +187,13 @@ func (c *cli) validateStart(o *startOptions) error {
 	}
 	if o.port < 1 || o.port > 65535 {
 		return usageError("invalid port: %d", o.port)
+	}
+	if len(o.binds) > 0 {
+		addrs, err := parseBindAddrs(o.binds, o.port)
+		if err != nil {
+			return usageError("%v", err)
+		}
+		o.binds = addrs
 	}
 	if err := validateMux(o.mux, o.noAuth, o.herdrNoAuth, o.hcNoAuth); err != nil {
 		return err
@@ -387,12 +411,10 @@ func (c *cli) cmdStart(args []string) error {
 			prevPort = saved.Port
 		}
 	}
-	bind := "127.0.0.1"
-	if o.lan {
-		bind = "0.0.0.0"
-	}
-	portErr := func(err error) error {
-		return fmt.Errorf("port %d is in use by another program (%v); stop it or choose --port", o.port, err)
+	prevAddrs := c.savedBindAddrs(saved)
+	addrs := resolveBindAddrs(o.binds, o.lan, o.port)
+	addrErr := func(addr string, err error) error {
+		return fmt.Errorf("address %s is in use by another program (%v); stop it or choose --port/--bind", addr, err)
 	}
 	var running []supervisor
 	for _, s := range c.supervisors() {
@@ -401,11 +423,13 @@ func (c *cli) cmdStart(args []string) error {
 		}
 	}
 	// Everything that can fail is checked before the running server stops:
-	// the user may be connected through it. A port other than the running
-	// server's is checked now; the same port only once that server is gone.
-	if len(running) == 0 || o.port != prevPort {
-		if err := portFree(bind, o.port); err != nil {
-			return portErr(err)
+	// the user may be connected through it. Addresses not held by the running
+	// server are checked now; overlapping ones only once that server is gone.
+	for _, addr := range addrs {
+		if len(running) == 0 || !slices.Contains(prevAddrs, addr) {
+			if err := portFreeAddr(addr); err != nil {
+				return addrErr(addr, err)
+			}
 		}
 	}
 	if o.tailscale != "" {
@@ -427,12 +451,14 @@ func (c *cli) cmdStart(args []string) error {
 		}
 	}
 	if len(running) > 0 {
-		if err := c.waitStopped(prevPort, processKillWait+2*time.Second); err != nil {
+		if err := c.waitStoppedAddr(healthProbeAddr(prevAddrs, prevPort), processKillWait+2*time.Second); err != nil {
 			return err
 		}
-		if o.port == prevPort {
-			if err := portFree(bind, o.port); err != nil {
-				return portErr(err)
+		for _, addr := range addrs {
+			if slices.Contains(prevAddrs, addr) {
+				if err := portFreeAddr(addr); err != nil {
+					return addrErr(addr, err)
+				}
 			}
 		}
 	}
@@ -441,6 +467,7 @@ func (c *cli) cmdStart(args []string) error {
 	}
 	if err := c.saveConfig(savedConfig{
 		LAN:               o.lan,
+		Binds:             o.binds,
 		NoAuth:            o.noAuth,
 		Port:              o.port,
 		Tailscale:         o.tailscale,
@@ -878,7 +905,7 @@ func (c *cli) cmdStop(args []string) error {
 	if err := sup.Stop(); err != nil {
 		return err
 	}
-	if err := c.waitStopped(c.savedPort(saved), processKillWait+2*time.Second); err != nil {
+	if err := c.waitStoppedAddr(healthProbeAddr(c.savedBindAddrs(saved), c.savedPort(saved)), processKillWait+2*time.Second); err != nil {
 		return err
 	}
 	if saved != nil {
@@ -914,7 +941,7 @@ func (c *cli) cmdRestart(args []string) error {
 	if err := sup.Stop(); err != nil {
 		return err
 	}
-	if err := c.waitStopped(port, processKillWait+2*time.Second); err != nil {
+	if err := c.waitStoppedAddr(healthProbeAddr(c.savedBindAddrs(saved), port), processKillWait+2*time.Second); err != nil {
 		return err
 	}
 	if err := sup.Start(); err != nil {
@@ -932,6 +959,14 @@ func (c *cli) savedPort(saved *savedConfig) int {
 		return saved.Port
 	}
 	return c.defaultPort()
+}
+
+func (c *cli) savedBindAddrs(saved *savedConfig) []string {
+	port := c.savedPort(saved)
+	if saved == nil {
+		return resolveBindAddrs(nil, false, port)
+	}
+	return resolveBindAddrs(saved.Binds, saved.LAN, port)
 }
 
 // cmdStatus reports what the running server itself says, then how it is
@@ -988,7 +1023,9 @@ func (c *cli) cmdStatus(args []string) error {
 	}
 	if saved != nil {
 		bind, auth := "127.0.0.1 (this machine only)", "on"
-		if saved.LAN {
+		if len(saved.Binds) > 0 {
+			bind = strings.Join(resolveBindAddrs(saved.Binds, saved.LAN, port), ", ")
+		} else if saved.LAN {
 			bind = "0.0.0.0 (LAN)"
 		}
 		if saved.NoAuth {
@@ -1096,12 +1133,13 @@ func (c *cli) cmdUninstall(args []string) error {
 
 // warnExposure prints one line whenever auth is off or the LAN can connect.
 func (c *cli) warnExposure(o startOptions) {
+	remote := o.lan || o.tailscale != "" || hasNonLoopbackBind(o.binds)
 	switch {
-	case o.noAuth && (o.lan || o.tailscale != ""):
+	case o.noAuth && remote:
 		c.warnf("Auth is OFF and other machines can reach this server: anyone on that network gets a shell. Drop it with --no-auth=false.")
 	case o.noAuth:
 		c.warnf("Auth is off: %s can open a shell through the server (turn it on: --no-auth=false)", noAuthReach(c.goos, onWSL(c.goos), o.allowLocalUsers))
-	case o.lan:
+	case len(o.binds) == 0 && o.lan:
 		c.warnf("LAN access is on: every device on this network can reach the login page (turn it off: --lan=false)")
 	}
 	if o.proxy.cloudflare != "" {
@@ -1170,15 +1208,21 @@ func (c *cli) showAccessInfo(o startOptions, pass string, reused bool) {
 	if o.proxy.cloudflare != "" {
 		fmt.Fprintf(c.out, "Cloudflare: %s\n", c.paint(ansiCyan, cloudflareURL(o.proxy.cloudflare)))
 	}
-	fmt.Fprintf(c.out, "Local: %s\n", c.paint(ansiCyan, fmt.Sprintf("http://127.0.0.1:%d", o.port)))
-	if o.lan {
-		for _, ip := range c.localIPv4s() {
-			fmt.Fprintf(c.out, "LAN: %s\n", c.paint(ansiCyan, fmt.Sprintf("http://%s:%d", ip, o.port)))
+	if len(o.binds) > 0 {
+		for _, addr := range o.binds {
+			fmt.Fprintf(c.out, "Listen: %s\n", c.paint(ansiCyan, "http://"+addr))
+		}
+	} else {
+		fmt.Fprintf(c.out, "Local: %s\n", c.paint(ansiCyan, fmt.Sprintf("http://127.0.0.1:%d", o.port)))
+		if o.lan {
+			for _, ip := range c.localIPv4s() {
+				fmt.Fprintf(c.out, "LAN: %s\n", c.paint(ansiCyan, fmt.Sprintf("http://%s:%d", ip, o.port)))
+			}
 		}
 	}
 	fmt.Fprintf(c.out, "Backend: %s\n", o.mux)
 	hosts := slices.Clone(loopbackHosts)
-	if o.lan {
+	if o.lan || hasNonLoopbackBind(o.binds) {
 		hosts = append(hosts, "this machine's addresses")
 	}
 	if o.tailscale != "" {
@@ -1225,7 +1269,12 @@ func (c *cli) showCredentials(user, pass string) {
 
 // portFree reports an error when bind:port cannot be listened on.
 func portFree(bind string, port int) error {
-	ln, err := net.Listen("tcp", net.JoinHostPort(bind, strconv.Itoa(port)))
+	return portFreeAddr(net.JoinHostPort(bind, strconv.Itoa(port)))
+}
+
+// portFreeAddr reports an error when addr cannot be listened on.
+func portFreeAddr(addr string) error {
+	ln, err := listenTCP(context.Background(), addr)
 	if err != nil {
 		return err
 	}

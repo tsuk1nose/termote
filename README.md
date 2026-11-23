@@ -36,7 +36,7 @@ Remote control CLI tools (Claude Code, Codex, OpenCode, any terminal) from mobil
 
 > **Termote** = Terminal + Remote
 >
-> 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇻🇳 [Tiếng Việt](docs/i18n/README.vi.md) | 🇨🇳 [简体中文](docs/i18n/README.zh-CN.md) | 🇯🇵 [日本語](docs/i18n/README.ja.md) | 🇰🇷 [한국어](docs/i18n/README.ko.md) | 🇪🇸 [Español](docs/i18n/README.es.md) | 🇧🇷 [Português (BR)](docs/i18n/README.pt-BR.md) | 🇫🇷 [Français](docs/i18n/README.fr.md) | 🇩🇪 [Deutsch](docs/i18n/README.de.md) | 🇷🇺 [Русский](docs/i18n/README.ru.md) | 🇮🇩 [Bahasa Indonesia](docs/i18n/README.id.md)
 
 <p align="center">
   <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="Watch Termote in a minute (video)" width="720" /></a>

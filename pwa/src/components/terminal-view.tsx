@@ -784,8 +784,21 @@ export const TerminalView = forwardRef<TerminalHandle, Props>(
         return false
       })
 
+      let onDataSeq = 0
+      let atlasTimer = 0
+      const scheduleAtlasRefresh = () => {
+        if (!webglRef.current?.active()) return
+        if (atlasTimer) clearTimeout(atlasTimer)
+        atlasTimer = window.setTimeout(() => {
+          atlasTimer = 0
+          if (termRef.current !== term || !webglRef.current?.active()) return
+          term.clearTextureAtlas?.()
+          if (term.rows > 0) term.refresh?.(0, term.rows - 1)
+        }, 150)
+      }
       const subs = [
         term.onData((data) => {
+          onDataSeq++
           if (readOnlyRef.current) return
           const out = isHerdrRef.current ? stripTerminalReplies(data) : data
           if (!out) return
@@ -804,19 +817,75 @@ export const TerminalView = forwardRef<TerminalHandle, Props>(
           if (!isHerdrRef.current || drivingRef.current) {
             socketRef.current.sendResize(size)
           }
+          scheduleAtlasRefresh()
         }),
       ]
+      // Fallback for iOS WebKit non-composing non-ASCII punctuation (e.g.
+      // full-width Chinese punctuation) that xterm.js silently drops.
+      const textarea = term.textarea
+      let iosComposing = false
+      const iosTimers = new Set<number>()
+      const onCompositionStart = () => {
+        iosComposing = true
+      }
+      const onCompositionEnd = () => {
+        iosComposing = false
+      }
+      const isIOS =
+        /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+      const onTextareaInput = (event: Event) => {
+        if (readOnlyRef.current || iosComposing) return
+        const ev = event as InputEvent
+        if (ev.isComposing) return
+        if (
+          ev.inputType !== 'insertText' &&
+          ev.inputType !== 'insertReplacementText'
+        ) {
+          return
+        }
+        if (typeof ev.data !== 'string' || !/[^\x00-\x7f]/.test(ev.data)) return
+        const text = ev.data
+        const beforeSeq = onDataSeq
+        const timer = window.setTimeout(() => {
+          iosTimers.delete(timer)
+          if (readOnlyRef.current || onDataSeq !== beforeSeq) return
+          toLiveScreen()
+          socketRef.current.send(text)
+          if (textarea && textarea.value.endsWith(text)) {
+            textarea.value = ''
+          }
+        }, 0)
+        iosTimers.add(timer)
+      }
+      const attachIOSFallback = Boolean(textarea && isIOS)
+      if (attachIOSFallback && textarea) {
+        textarea.addEventListener('compositionstart', onCompositionStart)
+        textarea.addEventListener('compositionend', onCompositionEnd)
+        textarea.addEventListener('input', onTextareaInput)
+      }
       let settle: ReturnType<typeof setTimeout> | undefined
       const observer = new ResizeObserver(() => {
         clearTimeout(settle)
         if (coveredRef.current) return
-        settle = setTimeout(layout, RESIZE_SETTLE_MS)
+        settle = setTimeout(() => {
+          layout()
+          scheduleAtlasRefresh()
+        }, RESIZE_SETTLE_MS)
       })
       observer.observe(container)
       return () => {
         unprobe()
         dropHeld()
         clearTimeout(settle)
+        if (atlasTimer) clearTimeout(atlasTimer)
+        for (const t of iosTimers) clearTimeout(t)
+        iosTimers.clear()
+        if (attachIOSFallback && textarea) {
+          textarea.removeEventListener('compositionstart', onCompositionStart)
+          textarea.removeEventListener('compositionend', onCompositionEnd)
+          textarea.removeEventListener('input', onTextareaInput)
+        }
         observer.disconnect()
         for (const s of subs) s.dispose()
         webglRef.current?.dispose()

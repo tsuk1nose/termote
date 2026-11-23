@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -36,10 +36,10 @@ Controle remotamente ferramentas CLI (Claude Code, Codex, OpenCode, qualquer ter
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="Veja o Termote em um minuto (vídeo)" width="720" /></a>
+  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="Veja o Termote em um minuto (vídeo)" width="720" /></a>
 </p>
 
 ## Funcionalidades
@@ -143,11 +143,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-O termote transmite o próprio terminal (PTY no Unix, ConPTY no Windows) para o xterm.js na PWA; não existe mais um processo de terminal separado para fazer proxy. O modelo completo de proteção de requisições está em [`docs/system-architecture.md`](docs/system-architecture.md).
+O termote transmite o próprio terminal (PTY no Unix, ConPTY no Windows) para o xterm.js na PWA; não existe mais um processo de terminal separado para fazer proxy. O modelo completo de proteção de requisições está em [`docs/system-architecture.md`](../system-architecture.md).
 
 ## Início Rápido
 
-> 📖 **Novo no Termote?** Confira o [Guia de Início](docs/getting-started.md) para um passo a passo completo com exemplos.
+> 📖 **Novo no Termote?** Confira o [Guia de Início](../getting-started.md) para um passo a passo completo com exemplos.
 
 **Linux / macOS:**
 
@@ -222,7 +222,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Sem `TERMOTE_VERSION`, o instalador usa a release estável mais recente (1.0 ou posterior) e não mexe em uma instalação existente. Com ela, essa versão é instalada ao lado da atual e passa a ser a versão ativa, o que também repara uma instalação quebrada. Uma pre-release (`X.Y.Z-rc.N`) só é instalada quando nomeada assim (ou com `termote update --version`), e só depois de publicada; veja o [Deployment Guide](docs/deployment-guide.md#pre-releases).
+Sem `TERMOTE_VERSION`, o instalador usa a release estável mais recente (1.0 ou posterior) e não mexe em uma instalação existente. Com ela, essa versão é instalada ao lado da atual e passa a ser a versão ativa, o que também repara uma instalação quebrada. Uma pre-release (`X.Y.Z-rc.N`) só é instalada quando nomeada assim (ou com `termote update --version`), e só depois de publicada; veja o [Deployment Guide](../deployment-guide.md#pre-releases).
 
 ### Modo Container
 
@@ -419,7 +419,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**Testes Manuais:** Veja o [Self-Test Checklist](docs/self-test-checklist.md)
+**Testes Manuais:** Veja o [Self-Test Checklist](../self-test-checklist.md)
 
 ## Solução de Problemas
 
@@ -460,7 +460,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **Arquivos de serviço sem segredos**: a unidade systemd, o agente launchd e a Tarefa Agendada nunca contêm a senha
 - Use HTTPS (Tailscale) em produção
 - Restrinja a redes confiáveis/VPN
-- O que um dispositivo conectado ou pareado pode fazer, e o que fazer quando um for perdido: [Modelo de segurança](docs/security-model.md)
+- O que um dispositivo conectado ou pareado pode fazer, e o que fazer quando um for perdido: [Modelo de segurança](../security-model.md)
 
 ## Outros Projetos
 

@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -36,10 +36,10 @@
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="Termote за минуту (видео)" width="720" /></a>
+  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="Termote за минуту (видео)" width="720" /></a>
 </p>
 
 ## Возможности
@@ -143,11 +143,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-termote сам передаёт поток терминала (PTY в Unix, ConPTY в Windows) в xterm.js внутри PWA, поэтому отдельного терминального процесса, к которому нужно проксировать, больше нет. Полная модель защиты запросов описана в [`docs/system-architecture.md`](docs/system-architecture.md).
+termote сам передаёт поток терминала (PTY в Unix, ConPTY в Windows) в xterm.js внутри PWA, поэтому отдельного терминального процесса, к которому нужно проксировать, больше нет. Полная модель защиты запросов описана в [`docs/system-architecture.md`](../system-architecture.md).
 
 ## Быстрый старт
 
-> 📖 **Впервые с Termote?** Посмотрите [Руководство по началу работы](docs/getting-started.md) — полное пошаговое описание с примерами.
+> 📖 **Впервые с Termote?** Посмотрите [Руководство по началу работы](../getting-started.md) — полное пошаговое описание с примерами.
 
 **Linux / macOS:**
 
@@ -222,7 +222,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Без `TERMOTE_VERSION` установщик берёт самый новый стабильный релиз (1.0 или новее) и не трогает существующую установку. С этой переменной указанная версия ставится рядом с текущей и становится активной — так же можно восстановить сломанную установку. Предварительный релиз (`X.Y.Z-rc.N`) ставится, только если указать его так (или через `termote update --version`), и только после публикации; см. [Deployment Guide](docs/deployment-guide.md#pre-releases).
+Без `TERMOTE_VERSION` установщик берёт самый новый стабильный релиз (1.0 или новее) и не трогает существующую установку. С этой переменной указанная версия ставится рядом с текущей и становится активной — так же можно восстановить сломанную установку. Предварительный релиз (`X.Y.Z-rc.N`) ставится, только если указать его так (или через `termote update --version`), и только после публикации; см. [Deployment Guide](../deployment-guide.md#pre-releases).
 
 ### Контейнерный режим
 
@@ -419,7 +419,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**Ручное тестирование:** См. [Self-Test Checklist](docs/self-test-checklist.md)
+**Ручное тестирование:** См. [Self-Test Checklist](../self-test-checklist.md)
 
 ## Устранение неполадок
 
@@ -460,7 +460,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **Файлы службы не содержат секретов**: юнит systemd, агент launchd и задача планировщика никогда не содержат пароль
 - Используйте HTTPS (Tailscale) в продакшене
 - Ограничьте доступ доверенными сетями/VPN
-- Что может вошедшее или сопряжённое устройство и что делать, если его потеряли: [Модель безопасности](docs/security-model.md)
+- Что может вошедшее или сопряжённое устройство и что делать, если его потеряли: [Модель безопасности](../security-model.md)
 
 ## Другие проекты
 

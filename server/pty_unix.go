@@ -6,6 +6,7 @@ import (
 	"errors"
 	"os"
 	"os/exec"
+	"strings"
 	"sync"
 	"syscall"
 	"time"
@@ -96,14 +97,28 @@ func (s *ptyStream) Close() error {
 // it is where zellij finds the sessions), and no secrets.
 func terminalEnv() []string {
 	env := []string{"TERM=xterm-256color"}
+	hasUTF8 := isUTF8Locale(os.Getenv("LC_ALL")) ||
+		isUTF8Locale(os.Getenv("LC_CTYPE")) ||
+		isUTF8Locale(os.Getenv("LANG"))
 	for _, kv := range os.Environ() {
 		if hasEnvKey(kv, "TERM") || hasEnvKey(kv, "TMUX") || hasEnvKey(kv, "TMUX_PANE") ||
 			isZellijPaneEnv(kv) || isTermoteEnv(kv) {
 			continue
 		}
+		if !hasUTF8 && (hasEnvKey(kv, "LANG") || hasEnvKey(kv, "LC_ALL") || hasEnvKey(kv, "LC_CTYPE")) {
+			continue
+		}
 		env = append(env, kv)
 	}
+	if !hasUTF8 {
+		env = append(env, "LANG=C.UTF-8", "LC_ALL=C.UTF-8")
+	}
 	return env
+}
+
+func isUTF8Locale(v string) bool {
+	s := strings.ToLower(strings.TrimSpace(v))
+	return strings.Contains(s, "utf-8") || strings.Contains(s, "utf8")
 }
 
 // isZellijPaneEnv matches the variables Zellij sets in each pane.

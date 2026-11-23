@@ -2300,7 +2300,11 @@ export default function App({
       // blank band sat between the toolbar and the keyboard.
       style={{
         height:
-          keyboardHeight > 0 ? `${viewportHeight}px` : 'var(--app-height)',
+          viewportHeight > 0
+            ? `${viewportHeight}px`
+            : keyboardHeight > 0
+              ? `${viewportHeight}px`
+              : 'var(--app-height)',
         transform:
           viewportOffsetTop > 0
             ? `translateY(${viewportOffsetTop}px)`

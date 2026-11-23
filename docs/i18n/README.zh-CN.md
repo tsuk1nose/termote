@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -34,10 +34,10 @@
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="观看一分钟了解 Termote（视频）" width="720" /></a>
+  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="观看一分钟了解 Termote（视频）" width="720" /></a>
 </p>
 
 ## 功能特性
@@ -141,11 +141,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-termote 自己负责终端流（Unix 上用 PTY，Windows 上用 ConPTY），直接传给 PWA 中的 xterm.js，不再有需要代理的独立终端进程。完整的请求防护模型见 [`docs/system-architecture.md`](docs/system-architecture.md)。
+termote 自己负责终端流（Unix 上用 PTY，Windows 上用 ConPTY），直接传给 PWA 中的 xterm.js，不再有需要代理的独立终端进程。完整的请求防护模型见 [`docs/system-architecture.md`](../system-architecture.md)。
 
 ## 快速开始
 
-> 📖 **初次使用 Termote？** 请查看[入门指南](docs/getting-started.md)获取完整的操作步骤和示例。
+> 📖 **初次使用 Termote？** 请查看[入门指南](../getting-started.md)获取完整的操作步骤和示例。
 
 **Linux / macOS：**
 
@@ -220,7 +220,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-不设置 `TERMOTE_VERSION` 时，安装程序会获取最新的稳定版（1.0 或更高版本），且不会改动已有的安装。设置后，会将该版本安装在当前版本旁边并设为当前使用的版本，这也可以用来修复损坏的安装。预发布版本（`X.Y.Z-rc.N`）只有按这种方式指定（或使用 `termote update --version`）时才会安装，且仅在发布之后；参见[部署指南](docs/deployment-guide.md#pre-releases)。
+不设置 `TERMOTE_VERSION` 时，安装程序会获取最新的稳定版（1.0 或更高版本），且不会改动已有的安装。设置后，会将该版本安装在当前版本旁边并设为当前使用的版本，这也可以用来修复损坏的安装。预发布版本（`X.Y.Z-rc.N`）只有按这种方式指定（或使用 `termote update --version`）时才会安装，且仅在发布之后；参见[部署指南](../deployment-guide.md#pre-releases)。
 
 ### 容器模式
 
@@ -417,7 +417,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**手动测试：** 参见[自测清单](docs/self-test-checklist.md)
+**手动测试：** 参见[自测清单](../self-test-checklist.md)
 
 ## 故障排除
 
@@ -458,7 +458,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **服务文件不含机密** -- systemd 单元、launchd 代理和计划任务中都不包含密码
 - 生产环境请使用 HTTPS（Tailscale）
 - 限制在受信任的网络/VPN 中使用
-- 已登录或已配对的设备能做什么，以及设备丢失时该怎么办：[安全模型](docs/security-model.md)
+- 已登录或已配对的设备能做什么，以及设备丢失时该怎么办：[安全模型](../security-model.md)
 
 ## 其他项目
 

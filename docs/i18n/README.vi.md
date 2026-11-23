@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -36,10 +36,10 @@
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇬🇧 [English](../../README.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/vi/#xem-trong-một-phút"><img src="website/public/video/termote-intro.jpg" alt="Xem video Termote trong một phút" width="720" /></a>
+  <a href="https://termote.ohnice.app/vi/#xem-trong-một-phút"><img src="../../website/public/video/termote-intro.jpg" alt="Xem video Termote trong một phút" width="720" /></a>
 </p>
 
 ## Tính Năng
@@ -143,11 +143,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-Chính termote truyền luồng terminal (PTY trên Unix, ConPTY trên Windows) tới xterm.js trong PWA; không có tiến trình terminal riêng nào đứng sau để proxy tới. Mô hình chặn request đầy đủ nằm ở [`docs/system-architecture.md`](docs/system-architecture.md).
+Chính termote truyền luồng terminal (PTY trên Unix, ConPTY trên Windows) tới xterm.js trong PWA; không có tiến trình terminal riêng nào đứng sau để proxy tới. Mô hình chặn request đầy đủ nằm ở [`docs/system-architecture.md`](../system-architecture.md).
 
 ## Bắt Đầu Nhanh
 
-> 📖 **Mới dùng Termote?** Xem [Hướng dẫn Bắt đầu](docs/vi/getting-started.md) để có hướng dẫn chi tiết kèm ví dụ.
+> 📖 **Mới dùng Termote?** Xem [Hướng dẫn Bắt đầu](../vi/getting-started.md) để có hướng dẫn chi tiết kèm ví dụ.
 
 **Linux / macOS:**
 
@@ -222,7 +222,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Không có `TERMOTE_VERSION`, trình cài đặt lấy bản phát hành ổn định mới nhất (từ 1.0 trở lên) và để nguyên bản đã cài. Có biến này, phiên bản đó được cài bên cạnh bản hiện tại và trở thành phiên bản đang dùng; cách này cũng sửa được một bản cài bị hỏng. Bản phát hành thử (`X.Y.Z-rc.N`) chỉ được cài khi chỉ định tên theo cách này (hoặc bằng `termote update --version`), và chỉ sau khi đã phát hành; xem [Hướng dẫn triển khai](docs/deployment-guide.md#pre-releases).
+Không có `TERMOTE_VERSION`, trình cài đặt lấy bản phát hành ổn định mới nhất (từ 1.0 trở lên) và để nguyên bản đã cài. Có biến này, phiên bản đó được cài bên cạnh bản hiện tại và trở thành phiên bản đang dùng; cách này cũng sửa được một bản cài bị hỏng. Bản phát hành thử (`X.Y.Z-rc.N`) chỉ được cài khi chỉ định tên theo cách này (hoặc bằng `termote update --version`), và chỉ sau khi đã phát hành; xem [Hướng dẫn triển khai](../deployment-guide.md#pre-releases).
 
 ### Chế độ container
 
@@ -419,7 +419,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**Kiểm Tra Thủ Công:** Xem [Danh Sách Kiểm Tra](docs/vi/self-test-checklist.md)
+**Kiểm Tra Thủ Công:** Xem [Danh Sách Kiểm Tra](../vi/self-test-checklist.md)
 
 ## Xử Lý Sự Cố
 
@@ -460,7 +460,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **File service không chứa bí mật**: systemd unit, launchd agent và Scheduled Task không bao giờ chứa mật khẩu
 - Dùng HTTPS (Tailscale) cho production
 - Giới hạn trong mạng tin cậy/VPN
-- Thiết bị đã đăng nhập hoặc đã ghép nối làm được gì, và cần làm gì khi mất một thiết bị: [Mô hình bảo mật](docs/security-model.md)
+- Thiết bị đã đăng nhập hoặc đã ghép nối làm được gì, và cần làm gì khi mất một thiết bị: [Mô hình bảo mật](../security-model.md)
 
 ## Dự Án Khác
 

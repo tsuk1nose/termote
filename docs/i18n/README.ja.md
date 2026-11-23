@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -34,10 +34,10 @@
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="1分でわかる Termote（動画）" width="720" /></a>
+  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="1分でわかる Termote（動画）" width="720" /></a>
 </p>
 
 ## 機能
@@ -141,11 +141,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-termoteはターミナル自体を（UnixではPTY、WindowsではConPTYで）PWA内のxterm.jsへストリーミングします。プロキシ先となる別のターミナルプロセスはありません。リクエストガードの全体像は[`docs/system-architecture.md`](docs/system-architecture.md)を参照してください。
+termoteはターミナル自体を（UnixではPTY、WindowsではConPTYで）PWA内のxterm.jsへストリーミングします。プロキシ先となる別のターミナルプロセスはありません。リクエストガードの全体像は[`docs/system-architecture.md`](../system-architecture.md)を参照してください。
 
 ## クイックスタート
 
-> 📖 **Termote初めてですか？** 詳しい手順と例については[はじめにガイド](docs/getting-started.md)をご覧ください。
+> 📖 **Termote初めてですか？** 詳しい手順と例については[はじめにガイド](../getting-started.md)をご覧ください。
 
 **Linux / macOS:**
 
@@ -220,7 +220,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-`TERMOTE_VERSION`を指定しない場合、インストーラーは最新の安定版リリース（1.0以降）を取得し、既存のインストールには手を触れません。指定した場合はそのバージョンを現在のバージョンと並べてインストールし、有効なバージョンに切り替えます。壊れたインストールの修復にも使えます。プレリリース（`X.Y.Z-rc.N`）は、このように名前を指定した場合（または`termote update --version`）に限り、公開後にのみインストールされます。詳しくは[Deployment Guide](docs/deployment-guide.md#pre-releases)を参照してください。
+`TERMOTE_VERSION`を指定しない場合、インストーラーは最新の安定版リリース（1.0以降）を取得し、既存のインストールには手を触れません。指定した場合はそのバージョンを現在のバージョンと並べてインストールし、有効なバージョンに切り替えます。壊れたインストールの修復にも使えます。プレリリース（`X.Y.Z-rc.N`）は、このように名前を指定した場合（または`termote update --version`）に限り、公開後にのみインストールされます。詳しくは[Deployment Guide](../deployment-guide.md#pre-releases)を参照してください。
 
 ### コンテナモード
 
@@ -417,7 +417,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**手動テスト:** [セルフテストチェックリスト](docs/self-test-checklist.md)を参照
+**手動テスト:** [セルフテストチェックリスト](../self-test-checklist.md)を参照
 
 ## トラブルシューティング
 
@@ -458,7 +458,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **サービスファイルに秘密情報なし** - systemdユニット、launchdエージェント、スケジュールタスクにパスワードは含まれません
 - 本番環境ではHTTPS（Tailscale）を使用
 - 信頼できるネットワーク/VPNに制限
-- サインイン済みまたはペアリング済みのデバイスにできること、紛失したときの対処: [セキュリティモデル](docs/security-model.md)
+- サインイン済みまたはペアリング済みのデバイスにできること、紛失したときの対処: [セキュリティモデル](../security-model.md)
 
 ## その他のプロジェクト
 

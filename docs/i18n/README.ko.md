@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -34,10 +34,10 @@
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="1분 만에 보는 Termote (동영상)" width="720" /></a>
+  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="1분 만에 보는 Termote (동영상)" width="720" /></a>
 </p>
 
 ## 기능
@@ -141,11 +141,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-termote가 터미널을 직접(Unix에서는 PTY, Windows에서는 ConPTY) PWA의 xterm.js로 스트리밍하므로, 프록시할 별도의 터미널 프로세스가 없습니다. 요청 가드 모델 전체는 [`docs/system-architecture.md`](docs/system-architecture.md)를 참고하세요.
+termote가 터미널을 직접(Unix에서는 PTY, Windows에서는 ConPTY) PWA의 xterm.js로 스트리밍하므로, 프록시할 별도의 터미널 프로세스가 없습니다. 요청 가드 모델 전체는 [`docs/system-architecture.md`](../system-architecture.md)를 참고하세요.
 
 ## 빠른 시작
 
-> 📖 **Termote가 처음이신가요?** 예제와 함께하는 완전한 안내는 [시작 가이드](docs/getting-started.md)를 확인하세요.
+> 📖 **Termote가 처음이신가요?** 예제와 함께하는 완전한 안내는 [시작 가이드](../getting-started.md)를 확인하세요.
 
 **Linux / macOS:**
 
@@ -220,7 +220,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-`TERMOTE_VERSION`이 없으면 설치 프로그램은 최신 안정 릴리스(1.0 이상)를 가져오며 기존 설치는 건드리지 않습니다. 지정하면 해당 버전을 현재 버전 옆에 설치하고 활성 버전으로 전환하므로, 망가진 설치를 복구할 때도 쓸 수 있습니다. 프리릴리스(`X.Y.Z-rc.N`)는 이렇게 이름을 지정했을 때(또는 `termote update --version`)만, 그리고 공개된 뒤에만 설치됩니다. [Deployment Guide](docs/deployment-guide.md#pre-releases)를 참고하세요.
+`TERMOTE_VERSION`이 없으면 설치 프로그램은 최신 안정 릴리스(1.0 이상)를 가져오며 기존 설치는 건드리지 않습니다. 지정하면 해당 버전을 현재 버전 옆에 설치하고 활성 버전으로 전환하므로, 망가진 설치를 복구할 때도 쓸 수 있습니다. 프리릴리스(`X.Y.Z-rc.N`)는 이렇게 이름을 지정했을 때(또는 `termote update --version`)만, 그리고 공개된 뒤에만 설치됩니다. [Deployment Guide](../deployment-guide.md#pre-releases)를 참고하세요.
 
 ### 컨테이너 모드
 
@@ -417,7 +417,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**수동 테스트:** [셀프 테스트 체크리스트](docs/self-test-checklist.md) 참조
+**수동 테스트:** [셀프 테스트 체크리스트](../self-test-checklist.md) 참조
 
 ## 문제 해결
 
@@ -458,7 +458,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **서비스 파일에 비밀 정보 없음** - systemd 유닛, launchd 에이전트, 예약된 작업에는 비밀번호가 들어가지 않음
 - 프로덕션에는 HTTPS(Tailscale) 사용
 - 신뢰할 수 있는 네트워크/VPN으로 제한
-- 로그인했거나 페어링된 기기가 할 수 있는 일과 기기를 잃어버렸을 때 할 일: [보안 모델](docs/security-model.md)
+- 로그인했거나 페어링된 기기가 할 수 있는 일과 기기를 잃어버렸을 때 할 일: [보안 모델](../security-model.md)
 
 ## 다른 프로젝트
 

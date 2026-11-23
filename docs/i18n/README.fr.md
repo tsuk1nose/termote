@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -36,10 +36,10 @@ Contrôlez à distance des outils CLI (Claude Code, Codex, OpenCode, n'importe q
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="Découvrez Termote en une minute (vidéo)" width="720" /></a>
+  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="Découvrez Termote en une minute (vidéo)" width="720" /></a>
 </p>
 
 ## Fonctionnalités
@@ -143,11 +143,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-termote diffuse lui-même le terminal (PTY sous Unix, ConPTY sous Windows) vers xterm.js dans la PWA ; il n'y a plus de processus terminal séparé vers lequel relayer. Le modèle complet de protection des requêtes est décrit dans [`docs/system-architecture.md`](docs/system-architecture.md).
+termote diffuse lui-même le terminal (PTY sous Unix, ConPTY sous Windows) vers xterm.js dans la PWA ; il n'y a plus de processus terminal séparé vers lequel relayer. Le modèle complet de protection des requêtes est décrit dans [`docs/system-architecture.md`](../system-architecture.md).
 
 ## Démarrage Rapide
 
-> 📖 **Nouveau sur Termote ?** Consultez le [Guide de Démarrage](docs/getting-started.md) pour une présentation complète avec des exemples.
+> 📖 **Nouveau sur Termote ?** Consultez le [Guide de Démarrage](../getting-started.md) pour une présentation complète avec des exemples.
 
 **Linux / macOS :**
 
@@ -222,7 +222,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Sans `TERMOTE_VERSION`, l'installateur prend la release stable la plus récente (1.0 ou ultérieure) et ne touche pas à une installation existante. Avec elle, cette version est installée à côté de la version actuelle et devient la version active, ce qui permet aussi de réparer une installation cassée. Une pré-release (`X.Y.Z-rc.N`) n'est installée que si elle est nommée ainsi (ou avec `termote update --version`), et seulement une fois publiée ; voir le [Deployment Guide](docs/deployment-guide.md#pre-releases).
+Sans `TERMOTE_VERSION`, l'installateur prend la release stable la plus récente (1.0 ou ultérieure) et ne touche pas à une installation existante. Avec elle, cette version est installée à côté de la version actuelle et devient la version active, ce qui permet aussi de réparer une installation cassée. Une pré-release (`X.Y.Z-rc.N`) n'est installée que si elle est nommée ainsi (ou avec `termote update --version`), et seulement une fois publiée ; voir le [Deployment Guide](../deployment-guide.md#pre-releases).
 
 ### Mode conteneur
 
@@ -419,7 +419,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**Tests Manuels :** Voir [Liste de Vérification](docs/self-test-checklist.md)
+**Tests Manuels :** Voir [Liste de Vérification](../self-test-checklist.md)
 
 ## Dépannage
 
@@ -460,7 +460,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **Aucun secret dans les fichiers de service** - l'unité systemd, l'agent launchd et la tâche planifiée ne contiennent jamais le mot de passe
 - Utilisez HTTPS (Tailscale) pour la production
 - Restreignez aux réseaux de confiance/VPN
-- Ce qu'un appareil connecté ou appairé peut faire, et que faire si l'un d'eux est perdu : [Modèle de sécurité](docs/security-model.md)
+- Ce qu'un appareil connecté ou appairé peut faire, et que faire si l'un d'eux est perdu : [Modèle de sécurité](../security-model.md)
 
 ## Autres Projets
 

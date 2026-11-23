@@ -40,6 +40,7 @@ type serveConfig struct {
 	Pass         string
 	NoAuth       bool
 	Bind         string
+	BindAddrs    []string
 	AllowedHosts string
 	MuxBackend   string
 	// HerdrAllowNoAuth lets herdr run with auth disabled. herdr exposes every
@@ -747,6 +748,29 @@ func readDeadline(next http.Handler) http.Handler {
 // stream to escalate to a kill after processKillWait.
 const shutdownTimeout = processKillWait + 2*time.Second
 
+// listenAddrs returns the resolved host:port list this server should bind to.
+func (cfg serveConfig) listenAddrs() []string {
+	port, _ := strconv.Atoi(cfg.Port)
+	if len(cfg.BindAddrs) > 0 {
+		if addrs, err := parseBindAddrs(cfg.BindAddrs, port); err == nil && len(addrs) > 0 {
+			return addrs
+		}
+	}
+	bind := strings.TrimSpace(cfg.Bind)
+	if bind == "" {
+		bind = "0.0.0.0"
+	}
+	if strings.Contains(bind, ",") {
+		if addrs, err := parseBindAddrs([]string{bind}, port); err == nil && len(addrs) > 0 {
+			return addrs
+		}
+	}
+	if _, _, err := net.SplitHostPort(bind); err == nil {
+		return []string{bind}
+	}
+	return []string{net.JoinHostPort(bind, cfg.Port)}
+}
+
 // startServeMode starts the server (PWA static files + terminal stream + mux API + basic auth)
 func startServeMode(cfg serveConfig) {
 	fatal := func(err error) {
@@ -779,23 +803,35 @@ func startServeMode(cfg serveConfig) {
 		reapOrphanTerminals(isZellijStreamCmdline)
 		warnZellijTermoteEnv()
 	}
-	ln, err := net.Listen("tcp", net.JoinHostPort(cfg.Bind, cfg.Port))
-	if err != nil {
-		fatal(err)
-	}
+	addrs := cfg.listenAddrs()
+	listeners := make([]net.Listener, 0, len(addrs))
+	var localCheck *localPeerCheck
 	if cfg.CheckLocalUsers {
 		if check := newLocalPeerCheck(cfg.AllowLocalUsers); check != nil {
-			ln = check.listener(ln)
+			localCheck = check
 		} else {
 			log.Printf("connections from other local users are not checked on this OS")
 		}
+	}
+	for _, addr := range addrs {
+		ln, err := listenTCP(ctx, addr)
+		if err != nil {
+			for _, open := range listeners {
+				open.Close()
+			}
+			fatal(err)
+		}
+		if localCheck != nil {
+			ln = localCheck.listener(ln)
+		}
+		listeners = append(listeners, ln)
 	}
 	if cfg.OnListen != nil {
 		cfg.OnListen()
 	}
 	// After the first signal, a second one kills the process as usual.
 	go func() { <-ctx.Done(); stop() }()
-	if err := serveAndPublish(ctx, cfg, m, ln); err != nil {
+	if err := serveAndPublishMulti(ctx, cfg, m, listeners); err != nil {
 		fatal(err)
 	}
 }
@@ -804,16 +840,20 @@ func startServeMode(cfg serveConfig) {
 // it over Tailscale while it runs: applied once the port answers, removed
 // once the server stopped.
 func serveAndPublish(ctx context.Context, cfg serveConfig, m Mux, ln net.Listener) error {
+	return serveAndPublishMulti(ctx, cfg, m, []net.Listener{ln})
+}
+
+func serveAndPublishMulti(ctx context.Context, cfg serveConfig, m Mux, listeners []net.Listener) error {
 	if cfg.Tailscale == "" {
-		return runServer(ctx, cfg, m, ln)
+		return runServerMulti(ctx, cfg, m, listeners)
 	}
-	port := ln.Addr().(*net.TCPAddr).Port
+	port := listeners[0].Addr().(*net.TCPAddr).Port
 	applied := make(chan struct{})
 	go func() {
 		defer close(applied)
 		applyTailscale(ctx, cfg.Tailscale, port)
 	}()
-	err := runServer(ctx, cfg, m, ln)
+	err := runServerMulti(ctx, cfg, m, listeners)
 	// Not before the apply is over (its commands fail once ctx is done), or
 	// it could add the mapping back after it was removed.
 	<-applied
@@ -824,9 +864,15 @@ func serveAndPublish(ctx context.Context, cfg serveConfig, m Mux, ln net.Listene
 // runServer serves on ln until ctx is cancelled, then stops accepting
 // requests, closes every terminal stream and waits for their processes.
 func runServer(ctx context.Context, cfg serveConfig, m Mux, ln net.Listener) error {
+	return runServerMulti(ctx, cfg, m, []net.Listener{ln})
+}
+
+func runServerMulti(ctx context.Context, cfg serveConfig, m Mux, listeners []net.Listener) error {
 	handler, hub, push, agent, err := buildServerWith(cfg, m)
 	if err != nil {
-		ln.Close()
+		for _, ln := range listeners {
+			ln.Close()
+		}
 		return err
 	}
 	// Here, not in buildServer: a handler built for a test sends nothing
@@ -846,16 +892,26 @@ func runServer(ctx context.Context, cfg serveConfig, m Mux, ln net.Listener) err
 	} else if !webui.Built() {
 		pwa = "not built (placeholder page)"
 	}
-	log.Printf("Termote server listening on %s (PWA: %s, backend: %s)", ln.Addr(), pwa, m.Name())
+	addrStrs := make([]string, 0, len(listeners))
+	for _, ln := range listeners {
+		addrStrs = append(addrStrs, ln.Addr().String())
+	}
+	log.Printf("Termote server listening on %s (PWA: %s, backend: %s)", strings.Join(addrStrs, ", "), pwa, m.Name())
 	srv := &http.Server{
 		Handler:           handler,
 		ReadHeaderTimeout: 10 * time.Second,
 		IdleTimeout:       120 * time.Second,
 		ConnContext:       localSocketConnContext,
 	}
-	errCh := make(chan error, 1)
-	go func() { errCh <- srv.Serve(ln) }()
-	cleanupSocket := serveLocalSocket(srv, cfg, ln)
+	errCh := make(chan error, len(listeners))
+	for _, ln := range listeners {
+		go func(l net.Listener) {
+			if err := srv.Serve(l); err != nil && !errors.Is(err, http.ErrServerClosed) {
+				errCh <- err
+			}
+		}(ln)
+	}
+	cleanupSocket := serveLocalSocket(srv, cfg, listeners[0])
 	select {
 	case err := <-errCh:
 		srv.Close()

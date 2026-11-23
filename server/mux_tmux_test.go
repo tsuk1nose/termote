@@ -189,11 +189,17 @@ func TestIsTmuxAttachCmdline(t *testing.T) {
 			t.Errorf("isTmuxAttachCmdline(%q) = %v, want %v", cmdline, got, want)
 		}
 	}
-	if got := strings.Join(tmuxAttachArgv("$3"), " "); got != "tmux -S /run/t.sock attach -E -t $3" {
-		t.Errorf("tmuxAttachArgv = %q", got)
+	wantAttach := "tmux -S /run/t.sock attach -E -t $3"
+	wantView := "tmux -S /run/t.sock attach -E -r -t $3"
+	if runtime.GOOS != "windows" {
+		wantAttach = "tmux -S /run/t.sock -u attach -E -t $3"
+		wantView = "tmux -S /run/t.sock -u attach -E -r -t $3"
 	}
-	if got := strings.Join(tmuxViewAttachArgv("$3"), " "); got != "tmux -S /run/t.sock attach -E -r -t $3" {
-		t.Errorf("tmuxViewAttachArgv = %q", got)
+	if got := strings.Join(tmuxAttachArgv("$3"), " "); got != wantAttach {
+		t.Errorf("tmuxAttachArgv = %q, want %q", got, wantAttach)
+	}
+	if got := strings.Join(tmuxViewAttachArgv("$3"), " "); got != wantView {
+		t.Errorf("tmuxViewAttachArgv = %q, want %q", got, wantView)
 	}
 }
 

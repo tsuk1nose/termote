@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/termote/social/banner-readme-dark.svg" />
-    <img src="assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
+    <source media="(prefers-color-scheme: dark)" srcset="../../assets/branding/termote/social/banner-readme-dark.svg" />
+    <img src="../../assets/branding/termote/social/banner-readme-light.svg" alt="Termote" width="600" />
   </picture>
 </p>
 
@@ -36,10 +36,10 @@ CLI-Tools (Claude Code, Codex, OpenCode, jedes Terminal) per PWA von Mobilgerät
 
 > **Termote** = Terminal + Remote
 >
-> 🇬🇧 [English](README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
+> 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="website/public/video/termote-intro.jpg" alt="Termote in einer Minute (Video)" width="720" /></a>
+  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="Termote in einer Minute (Video)" width="720" /></a>
 </p>
 
 ## Funktionen
@@ -143,11 +143,11 @@ flowchart TB
     tmux --> Shell --> Tools
 ```
 
-termote streamt das Terminal selbst (PTY unter Unix, ConPTY unter Windows) an xterm.js in der PWA; einen separaten Terminalprozess, an den weitergeleitet werden müsste, gibt es nicht mehr. Das vollständige Schutzmodell für Anfragen beschreibt [`docs/system-architecture.md`](docs/system-architecture.md).
+termote streamt das Terminal selbst (PTY unter Unix, ConPTY unter Windows) an xterm.js in der PWA; einen separaten Terminalprozess, an den weitergeleitet werden müsste, gibt es nicht mehr. Das vollständige Schutzmodell für Anfragen beschreibt [`docs/system-architecture.md`](../system-architecture.md).
 
 ## Schnellstart
 
-> 📖 **Neu bei Termote?** Schau dir die [Erste-Schritte-Anleitung](docs/getting-started.md) für eine vollständige Anleitung mit Beispielen an.
+> 📖 **Neu bei Termote?** Schau dir die [Erste-Schritte-Anleitung](../getting-started.md) für eine vollständige Anleitung mit Beispielen an.
 
 **Linux / macOS:**
 
@@ -222,7 +222,7 @@ termote update --version 1.0.0
 $env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Ohne `TERMOTE_VERSION` nimmt der Installer das neueste stabile Release (1.0 oder neuer) und lässt eine vorhandene Installation unverändert. Mit der Variable wird diese Version neben der aktuellen installiert und zur aktiven Version; so lässt sich auch eine defekte Installation reparieren. Eine Vorabversion (`X.Y.Z-rc.N`) wird nur installiert, wenn sie so genannt wird (oder mit `termote update --version`), und erst, wenn sie veröffentlicht ist; siehe den [Deployment Guide](docs/deployment-guide.md#pre-releases).
+Ohne `TERMOTE_VERSION` nimmt der Installer das neueste stabile Release (1.0 oder neuer) und lässt eine vorhandene Installation unverändert. Mit der Variable wird diese Version neben der aktuellen installiert und zur aktiven Version; so lässt sich auch eine defekte Installation reparieren. Eine Vorabversion (`X.Y.Z-rc.N`) wird nur installiert, wenn sie so genannt wird (oder mit `termote update --version`), und erst, wenn sie veröffentlicht ist; siehe den [Deployment Guide](../deployment-guide.md#pre-releases).
 
 ### Container-Modus
 
@@ -419,7 +419,7 @@ pnpm --filter termote test:e2e       # Run Playwright tests
 pnpm --filter termote test:e2e:ui    # Run with UI debugger
 ```
 
-**Manuelles Testen:** Siehe [Selbsttest-Checkliste](docs/self-test-checklist.md)
+**Manuelles Testen:** Siehe [Selbsttest-Checkliste](../self-test-checklist.md)
 
 ## Fehlerbehebung
 
@@ -460,7 +460,7 @@ termote start --fresh      # If the saved password can no longer be read
 - **Keine Geheimnisse in Dienstdateien** - die systemd-Unit, der launchd-Agent und die geplante Aufgabe enthalten nie das Passwort
 - HTTPS (Tailscale) für Produktion verwenden
 - Auf vertrauenswürdige Netzwerke/VPN beschränken
-- Was ein angemeldetes oder gekoppeltes Gerät tun kann und was zu tun ist, wenn eines verloren geht: [Sicherheitsmodell](docs/security-model.md)
+- Was ein angemeldetes oder gekoppeltes Gerät tun kann und was zu tun ist, wenn eines verloren geht: [Sicherheitsmodell](../security-model.md)
 
 ## Andere Projekte
 
