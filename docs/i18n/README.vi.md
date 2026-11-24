@@ -6,12 +6,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/lamngockhuong/termote/releases"><img src="https://img.shields.io/github/v/release/lamngockhuong/termote?style=flat-square&color=blue" alt="Release" /></a>
-  <a href="https://github.com/lamngockhuong/termote/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/lamngockhuong/termote/ci.yml?branch=main&style=flat-square&label=CI" alt="CI" /></a>
-  <a href="https://github.com/lamngockhuong/termote/blob/main/LICENSE"><img src="https://img.shields.io/github/license/lamngockhuong/termote?style=flat-square" alt="License" /></a>
-  <a href="https://github.com/lamngockhuong/termote/stargazers"><img src="https://img.shields.io/github/stars/lamngockhuong/termote?style=flat-square&logo=github" alt="GitHub stars" /></a>
-  <a href="https://ghcr.io/lamngockhuong/termote"><img src="https://img.shields.io/badge/GHCR-termote-blue?style=flat-square&logo=github" alt="GHCR" /></a>
-  <a href="https://hub.docker.com/r/lamngockhuong/termote"><img src="https://img.shields.io/docker/pulls/lamngockhuong/termote?style=flat-square&logo=docker" alt="Docker Pulls" /></a>
+  <a href="https://github.com/tsuk1nose/termote/releases"><img src="https://img.shields.io/github/v/release/tsuk1nose/termote?style=flat-square&color=blue" alt="Release" /></a>
+  <a href="https://github.com/tsuk1nose/termote/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/tsuk1nose/termote/ci.yml?branch=main&style=flat-square&label=CI" alt="CI" /></a>
+  <a href="https://github.com/tsuk1nose/termote/blob/main/LICENSE"><img src="https://img.shields.io/github/license/tsuk1nose/termote?style=flat-square" alt="License" /></a>
+  <a href="https://github.com/tsuk1nose/termote/stargazers"><img src="https://img.shields.io/github/stars/tsuk1nose/termote?style=flat-square&logo=github" alt="GitHub stars" /></a>
 </p>
 
 <p align="center">
@@ -22,16 +20,14 @@
 </p>
 
 <p align="center">
-  <a href="https://launch.j2team.dev/products/termote?utm_source=badge-launched&utm_medium=badge&utm_campaign=badge-termote" target="_blank" rel="noopener noreferrer"><img src="https://launch.j2team.dev/badge/termote/dark" alt="Termote - Launched on J2TEAM Launch" width="170" height="36" loading="lazy" /></a>
   &nbsp;
-  <a href="https://unikorn.vn/p/termote?ref=embed-termote" target="_blank"><img src="https://unikorn.vn/api/widgets/badge/termote?theme=dark" alt="Termote trên Unikorn.vn" width="170" height="42" /></a>
 </p>
 
 Điều khiển từ xa các công cụ CLI (Claude Code, Codex, OpenCode, terminal bất kỳ) từ mobile/desktop qua PWA.
 
 > [!NOTE]
 > Termote 1.0 không nâng cấp được bản cài 0.x. Hãy gỡ 0.x theo
-> [tài liệu 0.x đã lưu trữ](https://termote.ohnice.app/vi/0.x/), rồi cài 1.0 bằng các lệnh ở
+> [tài liệu 0.x đã lưu trữ](https://github.com/tsuk1nose/termote), rồi cài 1.0 bằng các lệnh ở
 > [Bắt Đầu Nhanh](#bắt-đầu-nhanh).
 
 > **Termote** = Terminal + Remote
@@ -39,39 +35,39 @@
 > 🇬🇧 [English](../../README.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/vi/#xem-trong-một-phút"><img src="../../website/public/video/termote-intro.jpg" alt="Xem video Termote trong một phút" width="720" /></a>
+  <a href="https://github.com/tsuk1nose/termote"><img src="../../website/public/video/termote-intro.jpg" alt="Xem video Termote trong một phút" width="720" /></a>
 </p>
 
 ## Tính Năng
 
 - **Chuyển đổi session**: Nhiều tmux sessions với tạo/sửa/xóa
 - **Tab sessions**: Thanh tab ngang để chuyển nhanh giữa các cửa sổ
-- **Backend Herdr** (native hoặc trong container): điều khiển workspace của Herdr thay cho tmux, kèm huy hiệu trạng thái của agent lập trình trên từng pane — xem [Cài đặt Native](https://termote.ohnice.app/vi/installation/native/)
-- **View Chat**: đọc và trả lời một pane đang chạy Claude Code, Codex (khởi động với `--no-daemon`) hoặc OpenCode 2 như một cuộc trò chuyện, có gợi ý slash command, nút trả lời hộp thoại và danh sách subagent đang chạy — xem [Chat với agent](https://termote.ohnice.app/vi/usage/agent-chat/)
-- **Lịch sử phiên**: liệt kê các phiên Claude Code, Codex và OpenCode đã chạy trong thư mục của pane, đọc lại một phiên, tiếp tục nó trong tab mới hoặc fork một phiên đang chạy — xem [Tiếp tục phiên cũ](https://termote.ohnice.app/vi/usage/agent-chat/#tiếp-tục-phiên-cũ)
-- **Token và chi phí**: số token và chi phí ước tính của từng phiên agent, kèm tổng theo ngày — xem [Token và chi phí](https://termote.ohnice.app/vi/usage/overview/#token-và-chi-phí)
-- **File mà một phiên đã sửa**: danh sách file một phiên agent đã sửa, có trong Changes và trong lịch sử phiên, chạm vào file nào thì mở diff của file đó — xem [Changes](https://termote.ohnice.app/vi/usage/changes/#file-mà-một-session-đã-sửa)
-- **View Files và Changes**: duyệt thư mục của pane và các thay đổi git trong đó, xem trước file Markdown, trên mọi backend kể cả psmux trên Windows — xem [Files và Changes](https://termote.ohnice.app/vi/usage/files/)
+- **Backend Herdr** (native hoặc trong container): điều khiển workspace của Herdr thay cho tmux, kèm huy hiệu trạng thái của agent lập trình trên từng pane — xem [Cài đặt Native](https://github.com/tsuk1nose/termote)
+- **View Chat**: đọc và trả lời một pane đang chạy Claude Code, Codex (khởi động với `--no-daemon`) hoặc OpenCode 2 như một cuộc trò chuyện, có gợi ý slash command, nút trả lời hộp thoại và danh sách subagent đang chạy — xem [Chat với agent](https://github.com/tsuk1nose/termote)
+- **Lịch sử phiên**: liệt kê các phiên Claude Code, Codex và OpenCode đã chạy trong thư mục của pane, đọc lại một phiên, tiếp tục nó trong tab mới hoặc fork một phiên đang chạy — xem [Tiếp tục phiên cũ](https://github.com/tsuk1nose/termote)
+- **Token và chi phí**: số token và chi phí ước tính của từng phiên agent, kèm tổng theo ngày — xem [Token và chi phí](https://github.com/tsuk1nose/termote)
+- **File mà một phiên đã sửa**: danh sách file một phiên agent đã sửa, có trong Changes và trong lịch sử phiên, chạm vào file nào thì mở diff của file đó — xem [Changes](https://github.com/tsuk1nose/termote)
+- **View Files và Changes**: duyệt thư mục của pane và các thay đổi git trong đó, xem trước file Markdown, trên mọi backend kể cả psmux trên Windows — xem [Files và Changes](https://github.com/tsuk1nose/termote)
 - **Hàng đợi tin nhắn và link file trong Chat**: viết sẵn tin nhắn khi agent còn đang làm, tin nhắn được gửi khi agent xong; chạm vào đường dẫn file agent đã viết để mở file đó trong Files, đúng dòng
 - **Review và đưa vào stage**: comment trên từng dòng trong Changes và Files rồi gửi bản review cho agent; đưa vào stage, bỏ khỏi stage hoặc hủy thay đổi theo từng file hay từng hunk
 - **Xem và sửa trong Files**: xem PDF, .xlsx, .docx ở chế độ chỉ đọc; mở và lưu file Shift-JIS, EUC-JP, UTF-16; sửa Markdown cạnh bản xem trước cập nhật ngay khi gõ
 - **Mở trong Windows** (WSL): khi server chạy trong WSL, sao chép đường dẫn Windows của một file, hoặc mở file hay thư mục bằng chương trình tương ứng của Windows
-- **Places**: đưa một thư mục nằm ngoài pane vào Files bằng `termote start --allow-path <dir>` — xem [Places](https://termote.ohnice.app/vi/usage/files/#places)
-- **Task**: chạy script trong `package.json` và target trong Makefile của pane, gửi lần chạy lỗi cho agent — xem [Task](https://termote.ohnice.app/vi/usage/tasks/)
-- **Worktree**: mở một git worktree thành nhóm riêng, từ nhánh mới hoặc nhánh có sẵn (Herdr, tmux, Zellij, herdr-core, psmux) — xem [Worktree](https://termote.ohnice.app/vi/usage/sessions/#worktree)
+- **Places**: đưa một thư mục nằm ngoài pane vào Files bằng `termote start --allow-path <dir>` — xem [Places](https://github.com/tsuk1nose/termote)
+- **Task**: chạy script trong `package.json` và target trong Makefile của pane, gửi lần chạy lỗi cho agent — xem [Task](https://github.com/tsuk1nose/termote)
+- **Worktree**: mở một git worktree thành nhóm riêng, từ nhánh mới hoặc nhánh có sẵn (Herdr, tmux, Zellij, herdr-core, psmux) — xem [Worktree](https://github.com/tsuk1nose/termote)
 - **Cửa sổ riêng** (desktop): mở một file, diff, tab, pane hoặc trang tổng quan trong cửa sổ riêng
 - **Đính kèm ảnh**: gửi ảnh từ điện thoại vào terminal hoặc vào tin nhắn trong view Chat, agent đọc ảnh qua đường dẫn; ảnh đã dán vào Claude Code, Codex hay OpenCode mở lại được từ view Chat
-- **Backend Zellij** (Linux, macOS hoặc trong container): điều khiển các phiên, tab và pane Zellij của bạn thay cho tmux (Zellij 0.45.0 trở lên), chọn bằng `--mux zellij` — xem [Cài đặt Native](https://termote.ohnice.app/vi/installation/native/)
-- **Backend herdr-core** (native, mọi hệ điều hành): hiện đúng các không gian làm việc, tab và pane mà ứng dụng herdr đang hiện, với Termote là thêm một client của herdr-core (`hc` 0.1.16 trở lên), chọn bằng `--mux hc` — xem [Backend herdr-core](https://termote.ohnice.app/vi/installation/native/#backend-herdr-core)
-- **Máy**: theo dõi và điều khiển agent trên các máy khác của bạn từ một Termote, qua SSH bằng một khóa chỉ dùng được để vào Termote ở máy đó (`termote machine add <alias>`) — xem [Máy](https://termote.ohnice.app/vi/usage/machines/)
-- **Plugin Herdr**: mở pane Herdr đang dùng trong Termote, hiện liên kết thành mã QR để quét bằng điện thoại, bật hoặc tắt server mà không rời Herdr — xem [Plugin Herdr](https://termote.ohnice.app/vi/usage/herdr-plugin/)
+- **Backend Zellij** (Linux, macOS hoặc trong container): điều khiển các phiên, tab và pane Zellij của bạn thay cho tmux (Zellij 0.45.0 trở lên), chọn bằng `--mux zellij` — xem [Cài đặt Native](https://github.com/tsuk1nose/termote)
+- **Backend herdr-core** (native, mọi hệ điều hành): hiện đúng các không gian làm việc, tab và pane mà ứng dụng herdr đang hiện, với Termote là thêm một client của herdr-core (`hc` 0.1.16 trở lên), chọn bằng `--mux hc` — xem [Backend herdr-core](https://github.com/tsuk1nose/termote)
+- **Máy**: theo dõi và điều khiển agent trên các máy khác của bạn từ một Termote, qua SSH bằng một khóa chỉ dùng được để vào Termote ở máy đó (`termote machine add <alias>`) — xem [Máy](https://github.com/tsuk1nose/termote)
+- **Plugin Herdr**: mở pane Herdr đang dùng trong Termote, hiện liên kết thành mã QR để quét bằng điện thoại, bật hoặc tắt server mà không rời Herdr — xem [Plugin Herdr](https://github.com/tsuk1nose/termote)
 - **Thân thiện mobile**: Bàn phím ảo (Tab/Ctrl/Shift/mũi tên, mở rộng được)
 - **Hỗ trợ cử chỉ**: Vuốt cho Ctrl+C, Tab, cuộn màn hình
 - **Lịch sử lệnh**: Gợi nhớ các lệnh đã gửi trước đó với tìm kiếm
 - **Thao tác nhanh**: Phím ⋯ ghim ở cuối thanh công cụ mobile mở hàng Actions gồm các thao tác phổ biến (clear, cancel, exit)
 - **Kiểu giao diện**: Neutral, Terminal hoặc Native, chọn trong Settings, độc lập với theme sáng/tối
 - **Ngôn ngữ giao diện**: tiếng Anh hoặc tiếng Việt, chọn trong Settings; Auto theo ngôn ngữ trình duyệt
-- **Mang cài đặt theo**: xuất cài đặt của trình duyệt này ra file rồi nhập vào trình duyệt khác, hoặc xem lại các cài đặt mà agent lập trình đề xuất bằng `termote settings propose` — xem [Settings](https://termote.ohnice.app/vi/usage/settings/#xuất-và-nhập)
+- **Mang cài đặt theo**: xuất cài đặt của trình duyệt này ra file rồi nhập vào trình duyệt khác, hoặc xem lại các cài đặt mà agent lập trình đề xuất bằng `termote settings propose` — xem [Settings](https://github.com/tsuk1nose/termote)
 - **Vẽ terminal bằng GPU**: terminal được vẽ bằng WebGL2 khi thiết bị có GPU, nhờ vậy output dài vẫn cuộn mượt
 - **Chỉ báo kết nối**: Trạng thái server real-time, tự phát hiện mất kết nối
 - **Kiểm tra cập nhật**: Tự động thông báo khi GitHub có bản phát hành mới
@@ -84,7 +80,7 @@
 
 ## Ảnh Chụp Màn Hình
 
-**[Dùng thử bản demo](https://termote.ohnice.app/demo/)**: chính ứng dụng chạy ngay trong trình duyệt, trên điện thoại hay máy tính, với dữ liệu giả và không cần cài đặt.
+**[Dùng thử bản demo](https://github.com/tsuk1nose/termote)**: chính ứng dụng chạy ngay trong trình duyệt, trên điện thoại hay máy tính, với dữ liệu giả và không cần cài đặt.
 
 <p align="center">
   <img src="docs/images/screenshots/phones.png" alt="Terminal, Chat và Changes trên điện thoại" width="720" />
@@ -152,31 +148,27 @@ Chính termote truyền luồng terminal (PTY trên Unix, ConPTY trên Windows) 
 **Linux / macOS:**
 
 ```bash
-curl -fsSL https://termote.ohnice.app/install.sh | sh
 termote start
 ```
 
 **Homebrew (macOS, Linux):**
 
 ```bash
-brew install lamngockhuong/tap/termote
 termote start
 ```
 
-Bản cài bằng Homebrew được cập nhật qua brew, không dùng `termote update`: `brew upgrade termote && termote restart`. Gỡ bằng `termote uninstall && brew uninstall termote`.
 
 **Windows (PowerShell):**
 
 ```powershell
-irm https://termote.ohnice.app/install.ps1 | iex
 termote start
 ```
 
-**Cài bằng agent lập trình:** dán prompt ở trang [Cài bằng agent](https://termote.ohnice.app/vi/installation/agent/) vào Claude Code, Codex hoặc agent khác. Agent làm theo [`agents.md`](https://termote.ohnice.app/agents.md), kiểm tra server đã trả lời rồi để bạn tự xem mật khẩu.
+**Cài bằng agent lập trình:** dán prompt ở trang [Cài bằng agent](https://github.com/tsuk1nose/termote) vào Claude Code, Codex hoặc agent khác. Agent làm theo [`agents.md`](https://github.com/tsuk1nose/termote), kiểm tra server đã trả lời rồi để bạn tự xem mật khẩu.
 
 Trình cài đặt chỉ cần `curl`, `tar` và `sha256sum`/`shasum` (trên Windows là PowerShell), không cần sudo hay quyền admin. Nó kiểm tra mã băm SHA-256 của gói tải về, cài lệnh `termote` và không khởi động gì cả. `termote start` lưu các tùy chọn, tạo mật khẩu ở lần chạy đầu (chỉ in ra một lần, và chỉ khi chạy trong terminal; xem lại bằng `termote show-password`), đăng ký service rồi khởi động nó. Mở `http://127.0.0.1:7680` (Windows: `http://127.0.0.1:7690`).
 
-Cần cài sẵn một backend terminal: tmux (`sudo apt install tmux`, `brew install tmux`), psmux trên Windows (`winget install psmux`), hoặc [Herdr](https://termote.ohnice.app/vi/installation/native/). Lần `start` đầu tiên sẽ tự nhận ra nên dùng backend nào. [Zellij](https://zellij.dev/documentation/installation) 0.45.0 trở lên (Linux, macOS) không bao giờ được tự nhận ra: hãy chọn bằng `--mux zellij`. [herdr-core](https://herdr.dev/core/) (`hc` 0.1.16 trở lên, mọi hệ điều hành, chỉ chạy native) cũng không được tự nhận ra: hãy chọn bằng `--mux hc`.
+Cần cài sẵn một backend terminal: tmux (`sudo apt install tmux`, `brew install tmux`), psmux trên Windows (`winget install psmux`), hoặc [Herdr](https://github.com/tsuk1nose/termote). Lần `start` đầu tiên sẽ tự nhận ra nên dùng backend nào. [Zellij](https://zellij.dev/documentation/installation) 0.45.0 trở lên (Linux, macOS) không bao giờ được tự nhận ra: hãy chọn bằng `--mux zellij`. [herdr-core](https://herdr.dev/core/) (`hc` 0.1.16 trở lên, mọi hệ điều hành, chỉ chạy native) cũng không được tự nhận ra: hãy chọn bằng `--mux hc`.
 
 ### Tùy chọn thường dùng
 
@@ -203,7 +195,6 @@ termote url --qr                     # The link to open, as a QR code for a phon
 termote pair                         # A one-time code that signs a new device in
 termote devices                      # List the paired devices (devices revoke <id>)
 termote machine add <ssh alias>      # Reach another computer's Termote (Machines in the sidebar)
-termote update                       # Update to the latest release
 termote uninstall                    # Remove the service, the command, the install and uploads
 ```
 
@@ -214,15 +205,11 @@ termote uninstall                    # Remove the service, the command, the inst
 ### Cài một phiên bản cố định
 
 ```bash
-curl -fsSL https://termote.ohnice.app/install.sh | TERMOTE_VERSION=1.0.0 sh
-termote update --version 1.0.0
 ```
 
 ```powershell
-$env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Không có `TERMOTE_VERSION`, trình cài đặt lấy bản phát hành ổn định mới nhất (từ 1.0 trở lên) và để nguyên bản đã cài. Có biến này, phiên bản đó được cài bên cạnh bản hiện tại và trở thành phiên bản đang dùng; cách này cũng sửa được một bản cài bị hỏng. Bản phát hành thử (`X.Y.Z-rc.N`) chỉ được cài khi chỉ định tên theo cách này (hoặc bằng `termote update --version`), và chỉ sau khi đã phát hành; xem [Hướng dẫn triển khai](../deployment-guide.md#pre-releases).
 
 ### Chế độ container
 
@@ -234,7 +221,6 @@ termote container logs -f
 termote container down
 ```
 
-`container up` chạy image `ghcr.io/lamngockhuong/termote` đúng với phiên bản của `termote` đã cài, bằng podman (ưu tiên) hoặc docker, trên port 7680, gắn thư mục `~/termote-workspace` vào `/workspace`. Lệnh nhận `--port`, `--lan`, `--tailscale`, `--cloudflare`, `--no-auth`, `--mux`, `--allow-host`, `--allow-path`, `--user`, `--fresh`, `--workspace` và `--build` (chỉ trong bản checkout); các giá trị này được lưu riêng với tùy chọn của `start`, còn tên đăng nhập và mật khẩu thì dùng chung với server native. Docker tự khởi động lại container sau khi máy khởi động lại; Podman chạy không cần quyền root thì không có tiến trình nền nào khởi động lại container, nên hãy chạy nó dưới dạng Quadlet unit.
 
 > **Lưu ý bảo mật**: Tránh mount trực tiếp `$HOME` — các thư mục nhạy cảm như `.ssh`, `.gnupg` sẽ truy cập được từ trong container. Hãy mount các thư mục dự án cụ thể.
 
@@ -244,12 +230,10 @@ termote container down
 # Generates a password: docker exec termote cat /home/termote/.config/termote/password
 docker run -d --name termote -p 7680:7680 \
   -v ~/projects:/workspace \
-  ghcr.io/lamngockhuong/termote:latest
 
 # With your own credentials
 docker run -d --name termote -p 7680:7680 \
   -e TERMOTE_USER=admin -e TERMOTE_PASS=secret \
-  ghcr.io/lamngockhuong/termote:latest
 ```
 
 | Biến Môi Trường | Mô Tả                                                                                   |
@@ -261,17 +245,16 @@ docker run -d --name termote -p 7680:7680 \
 ### Biên dịch từ mã nguồn
 
 ```bash
-git clone https://github.com/lamngockhuong/termote.git
+git clone https://github.com/tsuk1nose/termote.git
 cd termote
 make build
 ./scripts/termote.sh start
 ```
 
-`make build` tạo bản build của PWA rồi nhúng vào `server/termote`; cần có Go, Node.js và pnpm. `scripts/termote.sh` (Windows: `scripts\termote.ps1`) chỉ dùng để chạy từ bản checkout: nó biên dịch lại binary dành cho phát triển khi mã nguồn mới hơn, rồi chạy binary đó với cùng các tham số. `termote update` từ chối chạy trong bản checkout; hãy dùng `git pull && make build`.
 
 ### Nâng cấp từ 0.x
 
-Không có đường nâng cấp từ 0.x: bản 1.0 cài vào chỗ khác và không đọc cấu hình của 0.x. Hãy gỡ 0.x theo [tài liệu 0.x đã lưu trữ](https://termote.ohnice.app/vi/0.x/), sau đó cài 1.0 bằng các lệnh ở trên.
+Không có đường nâng cấp từ 0.x: bản 1.0 cài vào chỗ khác và không đọc cấu hình của 0.x. Hãy gỡ 0.x theo [tài liệu 0.x đã lưu trữ](https://github.com/tsuk1nose/termote), sau đó cài 1.0 bằng các lệnh ở trên.
 
 ## Chế Độ Triển Khai
 

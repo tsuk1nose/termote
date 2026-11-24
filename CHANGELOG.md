@@ -18,6 +18,11 @@ Synced with upstream `main` (through `v2.31.0` + `951fce49`) and reapplied local
 ### Documentation
 
 * organize localized README translations (`README.*.md`) under `docs/i18n/` and update relative links.
+* point README links to `tsuk1nose/termote` and remove upstream domain install scripts, container image links, and auto-update instructions.
+
+### Removed / Disabled
+
+* disable PWA auto-update checks (`api.github.com`), remove `https://api.github.com` from server CSP, hide Settings Updates panel, and disable `termote update` CLI/task entrypoints to prevent overwriting local builds.
 
 ## [2.31.0](https://github.com/lamngockhuong/termote/compare/v2.30.0...v2.31.0) (2026-11-21)
 

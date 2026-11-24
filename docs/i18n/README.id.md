@@ -6,12 +6,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/lamngockhuong/termote/releases"><img src="https://img.shields.io/github/v/release/lamngockhuong/termote?style=flat-square&color=blue" alt="Release" /></a>
-  <a href="https://github.com/lamngockhuong/termote/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/lamngockhuong/termote/ci.yml?branch=main&style=flat-square&label=CI" alt="CI" /></a>
-  <a href="https://github.com/lamngockhuong/termote/blob/main/LICENSE"><img src="https://img.shields.io/github/license/lamngockhuong/termote?style=flat-square" alt="License" /></a>
-  <a href="https://github.com/lamngockhuong/termote/stargazers"><img src="https://img.shields.io/github/stars/lamngockhuong/termote?style=flat-square&logo=github" alt="GitHub stars" /></a>
-  <a href="https://ghcr.io/lamngockhuong/termote"><img src="https://img.shields.io/badge/GHCR-termote-blue?style=flat-square&logo=github" alt="GHCR" /></a>
-  <a href="https://hub.docker.com/r/lamngockhuong/termote"><img src="https://img.shields.io/docker/pulls/lamngockhuong/termote?style=flat-square&logo=docker" alt="Docker Pulls" /></a>
+  <a href="https://github.com/tsuk1nose/termote/releases"><img src="https://img.shields.io/github/v/release/tsuk1nose/termote?style=flat-square&color=blue" alt="Release" /></a>
+  <a href="https://github.com/tsuk1nose/termote/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/tsuk1nose/termote/ci.yml?branch=main&style=flat-square&label=CI" alt="CI" /></a>
+  <a href="https://github.com/tsuk1nose/termote/blob/main/LICENSE"><img src="https://img.shields.io/github/license/tsuk1nose/termote?style=flat-square" alt="License" /></a>
+  <a href="https://github.com/tsuk1nose/termote/stargazers"><img src="https://img.shields.io/github/stars/tsuk1nose/termote?style=flat-square&logo=github" alt="GitHub stars" /></a>
 </p>
 
 <p align="center">
@@ -22,16 +20,14 @@
 </p>
 
 <p align="center">
-  <a href="https://launch.j2team.dev/products/termote?utm_source=badge-launched&utm_medium=badge&utm_campaign=badge-termote" target="_blank" rel="noopener noreferrer"><img src="https://launch.j2team.dev/badge/termote/dark" alt="Termote - Launched on J2TEAM Launch" width="170" height="36" loading="lazy" /></a>
   &nbsp;
-  <a href="https://unikorn.vn/p/termote?ref=embed-termote" target="_blank"><img src="https://unikorn.vn/api/widgets/badge/termote?theme=dark" alt="Termote trên Unikorn.vn" width="170" height="42" /></a>
 </p>
 
 Kendalikan alat CLI (Claude Code, Codex, OpenCode, terminal apa pun) dari jarak jauh melalui mobile/desktop via PWA.
 
 > [!NOTE]
 > Termote 1.0 tidak meng-upgrade instalasi 0.x. Hapus instalasi 0.x sesuai
-> [dokumentasi 0.x yang diarsipkan](https://termote.ohnice.app/0.x/), lalu pasang 1.0 dengan
+> [dokumentasi 0.x yang diarsipkan](https://github.com/tsuk1nose/termote), lalu pasang 1.0 dengan
 > perintah di [Mulai Cepat](#mulai-cepat).
 
 > **Termote** = Terminal + Remote
@@ -39,39 +35,39 @@ Kendalikan alat CLI (Claude Code, Codex, OpenCode, terminal apa pun) dari jarak 
 > 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇷🇺 [Русский](README.ru.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="Tonton Termote dalam semenit (video)" width="720" /></a>
+  <a href="https://github.com/tsuk1nose/termote"><img src="../../website/public/video/termote-intro.jpg" alt="Tonton Termote dalam semenit (video)" width="720" /></a>
 </p>
 
 ## Fitur
 
 - **Pergantian session**: Banyak tmux sessions dengan buat/edit/hapus
 - **Tab session**: Bilah tab horizontal untuk berpindah jendela dengan cepat
-- **Backend Herdr** (native atau di dalam container): kendalikan workspace Herdr sebagai pengganti tmux, dengan lencana status coding agent di setiap pane — lihat [Instalasi Native](https://termote.ohnice.app/installation/native/)
-- **Tampilan Chat**: baca dan balas pane yang menjalankan Claude Code, Codex (dijalankan dengan `--no-daemon`) atau OpenCode 2 sebagai obrolan, dengan saran slash command, jawaban dialog, dan subagent yang sedang berjalan — lihat [Agent Chat](https://termote.ohnice.app/usage/agent-chat/)
-- **Riwayat session**: tampilkan daftar session Claude Code, Codex, dan OpenCode yang pernah berjalan di folder sebuah pane, baca salah satunya, lanjutkan di tab baru, atau fork session yang sedang berjalan — lihat [Resuming an Old Session](https://termote.ohnice.app/usage/agent-chat/#resuming-an-old-session)
-- **Token dan biaya**: token dan perkiraan biaya setiap session agent, dengan total harian — lihat [Tokens and cost](https://termote.ohnice.app/usage/overview/#tokens-and-cost)
-- **File yang diubah session**: file yang diedit oleh session agent, tercantum di Changes dan di riwayat session, masing-masing membuka diff-nya — lihat [Changes](https://termote.ohnice.app/usage/changes/#files-a-session-changed)
-- **Tampilan Files dan Changes**: jelajahi direktori pane dan perubahan git-nya, dengan pratinjau Markdown, di semua backend termasuk psmux di Windows — lihat [Files and Changes](https://termote.ohnice.app/usage/files/)
+- **Backend Herdr** (native atau di dalam container): kendalikan workspace Herdr sebagai pengganti tmux, dengan lencana status coding agent di setiap pane — lihat [Instalasi Native](https://github.com/tsuk1nose/termote)
+- **Tampilan Chat**: baca dan balas pane yang menjalankan Claude Code, Codex (dijalankan dengan `--no-daemon`) atau OpenCode 2 sebagai obrolan, dengan saran slash command, jawaban dialog, dan subagent yang sedang berjalan — lihat [Agent Chat](https://github.com/tsuk1nose/termote)
+- **Riwayat session**: tampilkan daftar session Claude Code, Codex, dan OpenCode yang pernah berjalan di folder sebuah pane, baca salah satunya, lanjutkan di tab baru, atau fork session yang sedang berjalan — lihat [Resuming an Old Session](https://github.com/tsuk1nose/termote)
+- **Token dan biaya**: token dan perkiraan biaya setiap session agent, dengan total harian — lihat [Tokens and cost](https://github.com/tsuk1nose/termote)
+- **File yang diubah session**: file yang diedit oleh session agent, tercantum di Changes dan di riwayat session, masing-masing membuka diff-nya — lihat [Changes](https://github.com/tsuk1nose/termote)
+- **Tampilan Files dan Changes**: jelajahi direktori pane dan perubahan git-nya, dengan pratinjau Markdown, di semua backend termasuk psmux di Windows — lihat [Files and Changes](https://github.com/tsuk1nose/termote)
 - **Antrean pesan dan tautan file di Chat**: antrekan pesan saat agent masih bekerja; ketuk path file yang ditulis agent untuk membukanya di Files, tepat di barisnya
 - **Review dan staging**: beri komentar pada baris di Changes dan Files lalu kirim review ke agent; stage, unstage, atau buang perubahan per file atau per hunk
 - **Pratinjau dan pengeditan di Files**: PDF, .xlsx, dan .docx hanya-baca; buka dan simpan file Shift-JIS, EUC-JP, dan UTF-16; edit Markdown di samping pratinjau langsung
 - **Buka di Windows** (WSL): salin path Windows sebuah file, atau buka file atau folder dengan program Windows-nya, saat server berjalan di WSL
-- **Places**: tawarkan folder di luar pane di Files dengan `termote start --allow-path <dir>` — lihat [Places](https://termote.ohnice.app/usage/files/#places)
-- **Tasks**: jalankan script `package.json` dan target Makefile milik pane, kirim run yang gagal ke agent — lihat [Tasks](https://termote.ohnice.app/usage/tasks/)
-- **Worktree**: buka git worktree sebagai grup tersendiri, dari branch baru atau yang sudah ada (Herdr, tmux, Zellij, herdr-core, psmux) — lihat [Worktrees](https://termote.ohnice.app/usage/sessions/#worktrees)
+- **Places**: tawarkan folder di luar pane di Files dengan `termote start --allow-path <dir>` — lihat [Places](https://github.com/tsuk1nose/termote)
+- **Tasks**: jalankan script `package.json` dan target Makefile milik pane, kirim run yang gagal ke agent — lihat [Tasks](https://github.com/tsuk1nose/termote)
+- **Worktree**: buka git worktree sebagai grup tersendiri, dari branch baru atau yang sudah ada (Herdr, tmux, Zellij, herdr-core, psmux) — lihat [Worktrees](https://github.com/tsuk1nose/termote)
 - **Jendela terpisah** (desktop): buka file, diff, tab, pane, atau ringkasan di jendelanya sendiri
 - **Lampiran gambar**: kirim gambar dari ponsel ke terminal atau ke pesan di tampilan Chat, agar agent dapat membacanya lewat path; gambar yang ditempel ke Claude Code, Codex, atau OpenCode dapat dibuka lagi dari tampilan Chat
-- **Backend Zellij** (Linux, macOS, atau di dalam container): kendalikan sesi, tab, dan pane Zellij Anda alih-alih tmux (Zellij 0.45.0 atau lebih baru), dipilih dengan `--mux zellij` — lihat [Instalasi Native](https://termote.ohnice.app/installation/native/)
-- **Backend herdr-core** (native, semua OS): tampilkan space, tab, dan pane yang ditampilkan aplikasi herdr, sebagai satu klien lagi dari herdr-core (`hc` 0.1.16 atau lebih baru), dipilih dengan `--mux hc` — lihat [Backend herdr-core](https://termote.ohnice.app/installation/native/#herdr-core-backend)
-- **Machines**: pantau dan kendalikan agent di komputer Anda yang lain dari satu Termote, lewat SSH dengan kunci yang hanya bisa menjangkau Termote di sana (`termote machine add <alias>`) — lihat [Machines](https://termote.ohnice.app/usage/machines/)
-- **Plugin Herdr**: buka pane Herdr yang sedang aktif di Termote, tampilkan link-nya sebagai kode QR untuk ponsel, mulai atau hentikan server, tanpa meninggalkan Herdr — lihat [Herdr Plugin](https://termote.ohnice.app/usage/herdr-plugin/)
+- **Backend Zellij** (Linux, macOS, atau di dalam container): kendalikan sesi, tab, dan pane Zellij Anda alih-alih tmux (Zellij 0.45.0 atau lebih baru), dipilih dengan `--mux zellij` — lihat [Instalasi Native](https://github.com/tsuk1nose/termote)
+- **Backend herdr-core** (native, semua OS): tampilkan space, tab, dan pane yang ditampilkan aplikasi herdr, sebagai satu klien lagi dari herdr-core (`hc` 0.1.16 atau lebih baru), dipilih dengan `--mux hc` — lihat [Backend herdr-core](https://github.com/tsuk1nose/termote)
+- **Machines**: pantau dan kendalikan agent di komputer Anda yang lain dari satu Termote, lewat SSH dengan kunci yang hanya bisa menjangkau Termote di sana (`termote machine add <alias>`) — lihat [Machines](https://github.com/tsuk1nose/termote)
+- **Plugin Herdr**: buka pane Herdr yang sedang aktif di Termote, tampilkan link-nya sebagai kode QR untuk ponsel, mulai atau hentikan server, tanpa meninggalkan Herdr — lihat [Herdr Plugin](https://github.com/tsuk1nose/termote)
 - **Ramah mobile**: Toolbar keyboard virtual (Tab/Ctrl/Shift/panah, dapat diperluas)
 - **Dukungan gestur**: Geser untuk Ctrl+C, Tab, menggulir
 - **Riwayat perintah**: Panggil ulang perintah yang pernah dikirim dengan pencarian
 - **Aksi cepat**: Tombol ⋯ yang tersemat di ujung toolbar mobile menampilkan baris Actions berisi operasi umum (clear, cancel, exit)
 - **Gaya antarmuka**: Neutral, Terminal, atau Native, dipilih di Pengaturan, terpisah dari tema terang/gelap
 - **Bahasa antarmuka**: Inggris atau Vietnam, dipilih di Pengaturan; Auto mengikuti browser
-- **Pengaturan yang bisa dibawa**: ekspor pengaturan browser ini ke file lalu impor di browser lain, atau tinjau pengaturan yang diusulkan coding agent dengan `termote settings propose` — lihat [Settings](https://termote.ohnice.app/usage/settings/#export-and-import)
+- **Pengaturan yang bisa dibawa**: ekspor pengaturan browser ini ke file lalu impor di browser lain, atau tinjau pengaturan yang diusulkan coding agent dengan `termote settings propose` — lihat [Settings](https://github.com/tsuk1nose/termote)
 - **Terminal GPU**: terminal digambar dengan WebGL2 jika perangkat memiliki GPU, sehingga output yang besar tetap lancar
 - **Indikator koneksi**: Status server real-time, deteksi otomatis koneksi terputus
 - **Pemeriksa pembaruan**: Notifikasi otomatis versi baru dari GitHub releases
@@ -84,7 +80,7 @@ Kendalikan alat CLI (Claude Code, Codex, OpenCode, terminal apa pun) dari jarak 
 
 ## Tangkapan Layar
 
-**[Coba demonya](https://termote.ohnice.app/demo/)**: aplikasi sungguhan di browser Anda, di ponsel atau desktop, dengan data palsu dan tanpa instalasi.
+**[Coba demonya](https://github.com/tsuk1nose/termote)**: aplikasi sungguhan di browser Anda, di ponsel atau desktop, dengan data palsu dan tanpa instalasi.
 
 <p align="center">
   <img src="docs/images/screenshots/phones.png" alt="Terminal, Chat, dan Changes di ponsel" width="720" />
@@ -152,31 +148,27 @@ termote mengalirkan terminal sendiri (PTY di Unix, ConPTY di Windows) ke xterm.j
 **Linux / macOS:**
 
 ```bash
-curl -fsSL https://termote.ohnice.app/install.sh | sh
 termote start
 ```
 
 **Homebrew (macOS, Linux):**
 
 ```bash
-brew install lamngockhuong/tap/termote
 termote start
 ```
 
-Instalasi Homebrew diperbarui lewat brew, bukan `termote update`: `brew upgrade termote && termote restart`. Hapus dengan `termote uninstall && brew uninstall termote`.
 
 **Windows (PowerShell):**
 
 ```powershell
-irm https://termote.ohnice.app/install.ps1 | iex
 termote start
 ```
 
-**Dengan coding agent:** tempel prompt dari [Install with an agent](https://termote.ohnice.app/installation/agent/) ke Claude Code, Codex, atau agent lain. Agent mengikuti [`agents.md`](https://termote.ohnice.app/agents.md), memeriksa bahwa server menjawab, dan membiarkan Anda melihat kata sandinya sendiri.
+**Dengan coding agent:** tempel prompt dari [Install with an agent](https://github.com/tsuk1nose/termote) ke Claude Code, Codex, atau agent lain. Agent mengikuti [`agents.md`](https://github.com/tsuk1nose/termote), memeriksa bahwa server menjawab, dan membiarkan Anda melihat kata sandinya sendiri.
 
 Installer hanya membutuhkan `curl`, `tar` dan `sha256sum`/`shasum` (PowerShell di Windows), tanpa sudo atau hak admin. Installer memverifikasi checksum arsip, memasang perintah `termote`, dan tidak menjalankan apa pun. `termote start` menyimpan opsi, membuat password saat pertama kali (ditampilkan sekali, dan hanya di terminal; `termote show-password` menampilkannya lagi), mendaftarkan service lalu menjalankannya. Buka `http://127.0.0.1:7680` (Windows: `http://127.0.0.1:7690`).
 
-Backend terminal harus sudah terpasang lebih dulu: tmux (`sudo apt install tmux`, `brew install tmux`), psmux di Windows (`winget install psmux`), atau [Herdr](https://termote.ohnice.app/installation/native/). `start` yang pertama mendeteksi backend mana yang dipakai. [Zellij](https://zellij.dev/documentation/installation) 0.45.0 atau lebih baru (Linux, macOS) tidak pernah dideteksi: pilih dengan `--mux zellij`. [herdr-core](https://herdr.dev/core/) (`hc` 0.1.16 atau lebih baru, semua OS, hanya native) juga tidak pernah dideteksi: pilih dengan `--mux hc`.
+Backend terminal harus sudah terpasang lebih dulu: tmux (`sudo apt install tmux`, `brew install tmux`), psmux di Windows (`winget install psmux`), atau [Herdr](https://github.com/tsuk1nose/termote). `start` yang pertama mendeteksi backend mana yang dipakai. [Zellij](https://zellij.dev/documentation/installation) 0.45.0 atau lebih baru (Linux, macOS) tidak pernah dideteksi: pilih dengan `--mux zellij`. [herdr-core](https://herdr.dev/core/) (`hc` 0.1.16 atau lebih baru, semua OS, hanya native) juga tidak pernah dideteksi: pilih dengan `--mux hc`.
 
 ### Opsi umum
 
@@ -203,7 +195,6 @@ termote url --qr                     # The link to open, as a QR code for a phon
 termote pair                         # A one-time code that signs a new device in
 termote devices                      # List the paired devices (devices revoke <id>)
 termote machine add <ssh alias>      # Reach another computer's Termote (Machines in the sidebar)
-termote update                       # Update to the latest release
 termote uninstall                    # Remove the service, the command, the install and uploads
 ```
 
@@ -214,15 +205,11 @@ termote uninstall                    # Remove the service, the command, the inst
 ### Menetapkan versi
 
 ```bash
-curl -fsSL https://termote.ohnice.app/install.sh | TERMOTE_VERSION=1.0.0 sh
-termote update --version 1.0.0
 ```
 
 ```powershell
-$env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Tanpa `TERMOTE_VERSION`, installer mengambil rilis stabil terbaru (1.0 atau lebih baru) dan tidak mengubah instalasi yang sudah ada. Dengan variabel itu, versi tersebut dipasang di samping versi saat ini dan menjadi versi aktif, sekaligus cara untuk memperbaiki instalasi yang rusak. Pre-release (`X.Y.Z-rc.N`) hanya dipasang bila disebut dengan cara ini (atau dengan `termote update --version`), dan hanya setelah diterbitkan; lihat [Deployment Guide](../deployment-guide.md#pre-releases).
 
 ### Mode Container
 
@@ -234,7 +221,6 @@ termote container logs -f
 termote container down
 ```
 
-`container up` menjalankan `ghcr.io/lamngockhuong/termote` pada versi `termote` yang terpasang, dengan podman (diutamakan) atau docker, di port 7680 dengan `~/termote-workspace` di-mount ke `/workspace`. Perintah ini menerima `--port`, `--lan`, `--tailscale`, `--cloudflare`, `--no-auth`, `--mux`, `--allow-host`, `--allow-path`, `--user`, `--fresh`, `--workspace` dan `--build` (hanya di checkout), yang disimpan terpisah dari opsi `start`; username dan password-nya sama dengan server native. Docker menjalankan ulang container setelah reboot; Podman rootless tidak punya daemon untuk itu, jadi jalankan sebagai unit Quadlet.
 
 > **Catatan keamanan**: Hindari mount `$HOME` secara langsung — direktori sensitif seperti `.ssh`, `.gnupg` akan dapat diakses di dalam container. Mount direktori proyek tertentu saja.
 
@@ -244,12 +230,10 @@ termote container down
 # Generates a password: docker exec termote cat /home/termote/.config/termote/password
 docker run -d --name termote -p 7680:7680 \
   -v ~/projects:/workspace \
-  ghcr.io/lamngockhuong/termote:latest
 
 # With your own credentials
 docker run -d --name termote -p 7680:7680 \
   -e TERMOTE_USER=admin -e TERMOTE_PASS=secret \
-  ghcr.io/lamngockhuong/termote:latest
 ```
 
 | Variabel Lingkungan | Deskripsi                                                                                            |
@@ -261,17 +245,16 @@ docker run -d --name termote -p 7680:7680 \
 ### Build dari source
 
 ```bash
-git clone https://github.com/lamngockhuong/termote.git
+git clone https://github.com/tsuk1nose/termote.git
 cd termote
 make build
 ./scripts/termote.sh start
 ```
 
-`make build` mem-build PWA dan menyematkannya ke `server/termote`; dibutuhkan Go, Node.js dan pnpm. `scripts/termote.sh` (Windows: `scripts\termote.ps1`) hanya menjalankan checkout: skrip ini mem-build ulang binary pengembangan jika ada source yang lebih baru, lalu menjalankannya dengan argumen yang sama. `termote update` menolak berjalan di dalam checkout; gunakan `git pull && make build`.
 
 ### Upgrade dari 0.x
 
-Tidak ada upgrade dari 0.x: 1.0 terpasang di lokasi baru dan tidak membaca konfigurasi 0.x. Hapus instalasi 0.x sesuai [dokumentasi 0.x yang diarsipkan](https://termote.ohnice.app/0.x/), lalu pasang 1.0 dengan perintah di atas.
+Tidak ada upgrade dari 0.x: 1.0 terpasang di lokasi baru dan tidak membaca konfigurasi 0.x. Hapus instalasi 0.x sesuai [dokumentasi 0.x yang diarsipkan](https://github.com/tsuk1nose/termote), lalu pasang 1.0 dengan perintah di atas.
 
 ## Mode Deployment
 

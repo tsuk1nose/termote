@@ -32,6 +32,10 @@ var updateStable = 1500 * time.Millisecond
 // it points current back and restarts the old one. It runs from a pane of
 // the server it replaces: the service stops only the server process.
 func (c *cli) cmdUpdate(args []string) error {
+	return errors.New("auto-update is disabled in this fork; pull and rebuild from source")
+}
+
+func (c *cli) cmdUpdateDisabled(args []string) error {
 	var pin string
 	var force bool
 	fs := c.newFlagSet("update")

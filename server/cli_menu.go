@@ -16,7 +16,7 @@ func (c *cli) cmdMenu() error {
 	}
 	c.printMenuHeader()
 	switch c.choose("Select action:", []string{
-		"Start (set options)", "Stop", "Restart", "Status", "Update", "View logs", "Clean logs",
+		"Start (set options)", "Stop", "Restart", "Status", "View logs", "Clean logs",
 		"Show password", "Container up", "Container down", "Uninstall", "Exit",
 	}) {
 	case "Start (set options)":
@@ -27,8 +27,6 @@ func (c *cli) cmdMenu() error {
 		return c.cmdRestart(nil)
 	case "Status":
 		return c.cmdStatus(nil)
-	case "Update":
-		return c.cmdUpdate(nil)
 	case "View logs":
 		return c.cmdLogs([]string{"follow"})
 	case "Clean logs":

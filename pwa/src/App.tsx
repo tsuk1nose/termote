@@ -118,7 +118,6 @@ import {
   onViewOnlyRefusal,
   RequestError,
   type ResumeWhere,
-  runTermoteUpdate,
   selectTab,
 } from './hooks/use-mux-api'
 import { usePushSubscription } from './hooks/use-push-subscription'
@@ -177,7 +176,7 @@ import { loadPaneView, savePaneView } from './utils/pane-view'
 import { pickGroupTab } from './utils/pick-group-tab'
 import { isApplePlatform } from './utils/platform'
 import { formatRunning, uniqueNames } from './utils/running-commands'
-import { errorKey, serverErrorText } from './utils/server-error'
+import { errorKey } from './utils/server-error'
 import { matchesFilter } from './utils/session-filter'
 import {
   applySettings,
@@ -2245,48 +2244,6 @@ export default function App({
     />
   )
 
-  // Settings' Run in a new tab: this server's own update typed into a new
-  // tab of the open pane's group, then that tab shown. Only on this server
-  // (a machine's update is its own), for a full client, an install that
-  // updates itself and a backend that runs tasks.
-  const updatePaneId = activeSession.paneId
-  const install = appUpdate.server?.install
-  const runUpdate =
-    !readOnly &&
-    mux.caps.tasks &&
-    !currentMachine() &&
-    updatePaneId &&
-    (install === 'release' || install === 'homebrew')
-      ? async (): Promise<string | undefined> => {
-          let tabId: string | undefined
-          let paneId: string | undefined
-          let message: string
-          try {
-            ;({ tabId, paneId } = await runTermoteUpdate(updatePaneId))
-            message = t('settings.updates.runStarted', {
-              name: 'task:termote:update',
-            })
-          } catch (err) {
-            // The update already runs: its tab, as a new one would be
-            if (!(err instanceof RequestError && err.code === 'task_running'))
-              // Said in Settings, over which a toast would not show
-              return t('settings.updates.runFailed', {
-                message:
-                  err instanceof RequestError
-                    ? serverErrorText(err, t)
-                    : t('tasks.runFailed'),
-              })
-            tabId = err.tabId
-            message = t('settings.updates.runAlready')
-          }
-          setSettingsOpen(false)
-          if (tabId) setUpdateTab({ tabId, paneId: paneId || undefined })
-          void refreshSessions()
-          notify(message, { variant: 'success' })
-          return undefined
-        }
-      : undefined
-
   return (
     <div
       // A size container: the history list caps its height at a share of
@@ -3009,13 +2966,6 @@ export default function App({
         onDisableNotify={push.disable}
         onShowWelcome={focus ? undefined : showWelcome}
         onStartTour={focus ? undefined : startTour}
-        updates={{
-          server: appUpdate.server,
-          stale: appUpdate.stale,
-          reloading: appUpdate.reloading,
-          onReload: () => reloadToNewVersion(),
-          onRunUpdate: runUpdate,
-        }}
         onClearHistory={clearHistory}
         historyCount={history.length}
       />

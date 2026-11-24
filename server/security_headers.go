@@ -43,11 +43,11 @@ var policyHostRe = regexp.MustCompile(`^[A-Za-z0-9.-]+(:[0-9]+)?$`)
 // Host allowlist). The stream WebSocket is named by its scheme and host as
 // well as by 'self', which older browsers do not match against ws:/wss:.
 // Styles allow inline: xterm.js and React set style attributes, and xterm.js
-// adds style elements. api.github.com is the update check.
+// adds style elements.
 func contentSecurityPolicy(scripts []string, host string) string {
-	connect := "'self' https://api.github.com"
+	connect := "'self'"
 	if policyHostRe.MatchString(host) {
-		connect = "'self' ws://" + host + " wss://" + host + " https://api.github.com"
+		connect = "'self' ws://" + host + " wss://" + host
 	}
 	return strings.Join([]string{
 		"default-src 'self'",

@@ -6,12 +6,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/lamngockhuong/termote/releases"><img src="https://img.shields.io/github/v/release/lamngockhuong/termote?style=flat-square&color=blue" alt="Release" /></a>
-  <a href="https://github.com/lamngockhuong/termote/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/lamngockhuong/termote/ci.yml?branch=main&style=flat-square&label=CI" alt="CI" /></a>
-  <a href="https://github.com/lamngockhuong/termote/blob/main/LICENSE"><img src="https://img.shields.io/github/license/lamngockhuong/termote?style=flat-square" alt="License" /></a>
-  <a href="https://github.com/lamngockhuong/termote/stargazers"><img src="https://img.shields.io/github/stars/lamngockhuong/termote?style=flat-square&logo=github" alt="GitHub stars" /></a>
-  <a href="https://ghcr.io/lamngockhuong/termote"><img src="https://img.shields.io/badge/GHCR-termote-blue?style=flat-square&logo=github" alt="GHCR" /></a>
-  <a href="https://hub.docker.com/r/lamngockhuong/termote"><img src="https://img.shields.io/docker/pulls/lamngockhuong/termote?style=flat-square&logo=docker" alt="Docker Pulls" /></a>
+  <a href="https://github.com/tsuk1nose/termote/releases"><img src="https://img.shields.io/github/v/release/tsuk1nose/termote?style=flat-square&color=blue" alt="Release" /></a>
+  <a href="https://github.com/tsuk1nose/termote/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/tsuk1nose/termote/ci.yml?branch=main&style=flat-square&label=CI" alt="CI" /></a>
+  <a href="https://github.com/tsuk1nose/termote/blob/main/LICENSE"><img src="https://img.shields.io/github/license/tsuk1nose/termote?style=flat-square" alt="License" /></a>
+  <a href="https://github.com/tsuk1nose/termote/stargazers"><img src="https://img.shields.io/github/stars/tsuk1nose/termote?style=flat-square&logo=github" alt="GitHub stars" /></a>
 </p>
 
 <p align="center">
@@ -22,16 +20,14 @@
 </p>
 
 <p align="center">
-  <a href="https://launch.j2team.dev/products/termote?utm_source=badge-launched&utm_medium=badge&utm_campaign=badge-termote" target="_blank" rel="noopener noreferrer"><img src="https://launch.j2team.dev/badge/termote/dark" alt="Termote - Launched on J2TEAM Launch" width="170" height="36" loading="lazy" /></a>
   &nbsp;
-  <a href="https://unikorn.vn/p/termote?ref=embed-termote" target="_blank"><img src="https://unikorn.vn/api/widgets/badge/termote?theme=dark" alt="Termote trên Unikorn.vn" width="170" height="42" /></a>
 </p>
 
 Удалённое управление CLI-инструментами (Claude Code, Codex, OpenCode, любой терминал) с мобильных устройств и десктопа через PWA.
 
 > [!NOTE]
 > Termote 1.0 не обновляет установку 0.x. Удалите 0.x, как описано в
-> [архивной документации 0.x](https://termote.ohnice.app/0.x/), затем установите 1.0
+> [архивной документации 0.x](https://github.com/tsuk1nose/termote), затем установите 1.0
 > командами из раздела [Быстрый старт](#быстрый-старт).
 
 > **Termote** = Terminal + Remote
@@ -39,39 +35,39 @@
 > 🇬🇧 [English](../../README.md) | 🇻🇳 [Tiếng Việt](README.vi.md) | 🇨🇳 [简体中文](README.zh-CN.md) | 🇯🇵 [日本語](README.ja.md) | 🇰🇷 [한국어](README.ko.md) | 🇪🇸 [Español](README.es.md) | 🇧🇷 [Português (BR)](README.pt-BR.md) | 🇫🇷 [Français](README.fr.md) | 🇩🇪 [Deutsch](README.de.md) | 🇮🇩 [Bahasa Indonesia](README.id.md)
 
 <p align="center">
-  <a href="https://termote.ohnice.app/#see-it-in-a-minute"><img src="../../website/public/video/termote-intro.jpg" alt="Termote за минуту (видео)" width="720" /></a>
+  <a href="https://github.com/tsuk1nose/termote"><img src="../../website/public/video/termote-intro.jpg" alt="Termote за минуту (видео)" width="720" /></a>
 </p>
 
 ## Возможности
 
 - **Переключение сессий**: Множество tmux-сессий с созданием/редактированием/удалением
 - **Вкладки сессий**: Горизонтальная панель вкладок для быстрого переключения окон
-- **Бэкенд Herdr** (нативно или в контейнере): управление рабочими пространствами Herdr вместо tmux, со значками состояния ИИ-агента в каждой панели — см. [Нативная установка](https://termote.ohnice.app/installation/native/)
-- **Вид Chat**: читайте панель с Claude Code, Codex (запущенным с `--no-daemon`) или OpenCode 2 как чат и отвечайте в ней, с подсказками slash-команд, ответами на диалоги и запущенными субагентами — см. [Agent Chat](https://termote.ohnice.app/usage/agent-chat/)
-- **История сессий**: список сессий Claude Code, Codex и OpenCode, которые работали в папке панели; любую из них можно прочитать, продолжить в новой вкладке, а работающую — форкнуть — см. [Resuming an Old Session](https://termote.ohnice.app/usage/agent-chat/#resuming-an-old-session)
-- **Токены и стоимость**: токены и примерная стоимость каждой сессии агента, с итогами по дням — см. [Tokens and cost](https://termote.ohnice.app/usage/overview/#tokens-and-cost)
-- **Файлы, изменённые сессией**: файлы, которые отредактировала сессия агента, перечислены в Changes и в истории сессий, и каждый открывает свой diff — см. [Changes](https://termote.ohnice.app/usage/changes/#files-a-session-changed)
-- **Виды Files и Changes**: просмотр каталога панели и её изменений в git с предпросмотром Markdown на любом бэкенде, включая psmux в Windows — см. [Files and Changes](https://termote.ohnice.app/usage/files/)
+- **Бэкенд Herdr** (нативно или в контейнере): управление рабочими пространствами Herdr вместо tmux, со значками состояния ИИ-агента в каждой панели — см. [Нативная установка](https://github.com/tsuk1nose/termote)
+- **Вид Chat**: читайте панель с Claude Code, Codex (запущенным с `--no-daemon`) или OpenCode 2 как чат и отвечайте в ней, с подсказками slash-команд, ответами на диалоги и запущенными субагентами — см. [Agent Chat](https://github.com/tsuk1nose/termote)
+- **История сессий**: список сессий Claude Code, Codex и OpenCode, которые работали в папке панели; любую из них можно прочитать, продолжить в новой вкладке, а работающую — форкнуть — см. [Resuming an Old Session](https://github.com/tsuk1nose/termote)
+- **Токены и стоимость**: токены и примерная стоимость каждой сессии агента, с итогами по дням — см. [Tokens and cost](https://github.com/tsuk1nose/termote)
+- **Файлы, изменённые сессией**: файлы, которые отредактировала сессия агента, перечислены в Changes и в истории сессий, и каждый открывает свой diff — см. [Changes](https://github.com/tsuk1nose/termote)
+- **Виды Files и Changes**: просмотр каталога панели и её изменений в git с предпросмотром Markdown на любом бэкенде, включая psmux в Windows — см. [Files and Changes](https://github.com/tsuk1nose/termote)
 - **Очередь сообщений и ссылки на файлы в Chat**: ставьте сообщение в очередь, пока агент работает; нажмите на путь к файлу, написанный агентом, чтобы открыть файл в Files на нужной строке
 - **Ревью и staging**: комментируйте строки в Changes и Files и отправляйте ревью агенту; добавляйте в индекс, убирайте из индекса или отменяйте изменение по файлу или по hunk
 - **Предпросмотр и редактирование в Files**: PDF, .xlsx и .docx только для чтения; открытие и сохранение файлов в Shift-JIS, EUC-JP и UTF-16; редактирование Markdown рядом с живым предпросмотром
 - **Открыть в Windows** (WSL): скопировать Windows-путь файла или открыть файл либо папку программой Windows, когда сервер работает в WSL
-- **Places**: папка вне панели в Files через `termote start --allow-path <dir>` — см. [Places](https://termote.ohnice.app/usage/files/#places)
-- **Tasks**: запуск скриптов `package.json` и целей Makefile панели, отправка неудачного запуска агенту — см. [Tasks](https://termote.ohnice.app/usage/tasks/)
-- **Worktrees**: открыть git worktree отдельной группой из новой или существующей ветки (Herdr, tmux, Zellij, herdr-core, psmux) — см. [Worktrees](https://termote.ohnice.app/usage/sessions/#worktrees)
+- **Places**: папка вне панели в Files через `termote start --allow-path <dir>` — см. [Places](https://github.com/tsuk1nose/termote)
+- **Tasks**: запуск скриптов `package.json` и целей Makefile панели, отправка неудачного запуска агенту — см. [Tasks](https://github.com/tsuk1nose/termote)
+- **Worktrees**: открыть git worktree отдельной группой из новой или существующей ветки (Herdr, tmux, Zellij, herdr-core, psmux) — см. [Worktrees](https://github.com/tsuk1nose/termote)
 - **Отдельные окна** (десктоп): файл, diff, вкладка, панель или обзор в собственном окне
 - **Вложения изображений**: отправка изображения с телефона в терминал или в сообщение вида Chat, чтобы агент прочитал его по пути; изображение, вставленное в Claude Code, Codex или OpenCode, снова открывается из вида Chat
-- **Бэкенд Zellij** (Linux, macOS или в контейнере): управление сессиями, вкладками и панелями Zellij вместо tmux (Zellij 0.45.0 или новее), выбирается через `--mux zellij` — см. [Нативная установка](https://termote.ohnice.app/installation/native/)
-- **Бэкенд herdr-core** (нативно, любая ОС): показывает пространства, вкладки и панели, которые показывает приложение herdr, как ещё один клиент herdr-core (`hc` 0.1.16 или новее), выбирается через `--mux hc` — см. [Бэкенд herdr-core](https://termote.ohnice.app/installation/native/#herdr-core-backend)
-- **Machines**: следите за агентами других ваших компьютеров и управляйте ими из одного Termote по SSH с ключом, который даёт доступ только к Termote на той машине (`termote machine add <alias>`) — см. [Machines](https://termote.ohnice.app/usage/machines/)
-- **Плагин Herdr**: открыть активную панель Herdr в Termote, показать её ссылку QR-кодом для телефона, запустить или остановить сервер, не выходя из Herdr — см. [Herdr Plugin](https://termote.ohnice.app/usage/herdr-plugin/)
+- **Бэкенд Zellij** (Linux, macOS или в контейнере): управление сессиями, вкладками и панелями Zellij вместо tmux (Zellij 0.45.0 или новее), выбирается через `--mux zellij` — см. [Нативная установка](https://github.com/tsuk1nose/termote)
+- **Бэкенд herdr-core** (нативно, любая ОС): показывает пространства, вкладки и панели, которые показывает приложение herdr, как ещё один клиент herdr-core (`hc` 0.1.16 или новее), выбирается через `--mux hc` — см. [Бэкенд herdr-core](https://github.com/tsuk1nose/termote)
+- **Machines**: следите за агентами других ваших компьютеров и управляйте ими из одного Termote по SSH с ключом, который даёт доступ только к Termote на той машине (`termote machine add <alias>`) — см. [Machines](https://github.com/tsuk1nose/termote)
+- **Плагин Herdr**: открыть активную панель Herdr в Termote, показать её ссылку QR-кодом для телефона, запустить или остановить сервер, не выходя из Herdr — см. [Herdr Plugin](https://github.com/tsuk1nose/termote)
 - **Мобильная адаптация**: Виртуальная клавиатура (Tab/Ctrl/Shift/стрелки, расширяемая)
 - **Поддержка жестов**: Свайп для Ctrl+C, Tab, прокрутки
 - **История команд**: Вызов ранее отправленных команд с поиском
 - **Быстрые действия**: Клавиша ⋯, закреплённая в конце мобильной панели, показывает строку Actions с частыми операциями (clear, cancel, exit)
 - **Стили интерфейса**: Neutral, Terminal или Native, выбираются в настройках независимо от светлой/тёмной темы
 - **Язык интерфейса**: английский или вьетнамский, выбирается в настройках; Auto следует языку браузера
-- **Настройки с собой**: экспорт настроек этого браузера в файл и импорт в другом браузере, а также просмотр настроек, которые предлагает ИИ-агент через `termote settings propose` — см. [Settings](https://termote.ohnice.app/usage/settings/#export-and-import)
+- **Настройки с собой**: экспорт настроек этого браузера в файл и импорт в другом браузере, а также просмотр настроек, которые предлагает ИИ-агент через `termote settings propose` — см. [Settings](https://github.com/tsuk1nose/termote)
 - **Терминал на GPU**: терминал отрисовывается через WebGL2, если у устройства есть GPU, поэтому большой вывод остаётся плавным
 - **Индикатор соединения**: Статус сервера в реальном времени с автоопределением разрыва
 - **Проверка обновлений**: Автоматическое уведомление о новой версии из GitHub releases
@@ -84,7 +80,7 @@
 
 ## Скриншоты
 
-**[Попробуйте демо](https://termote.ohnice.app/demo/)**: настоящее приложение в браузере, на телефоне или десктопе, с вымышленными данными и без установки.
+**[Попробуйте демо](https://github.com/tsuk1nose/termote)**: настоящее приложение в браузере, на телефоне или десктопе, с вымышленными данными и без установки.
 
 <p align="center">
   <img src="docs/images/screenshots/phones.png" alt="Терминал, Chat и Changes на телефоне" width="720" />
@@ -152,31 +148,27 @@ termote сам передаёт поток терминала (PTY в Unix, ConP
 **Linux / macOS:**
 
 ```bash
-curl -fsSL https://termote.ohnice.app/install.sh | sh
 termote start
 ```
 
 **Homebrew (macOS, Linux):**
 
 ```bash
-brew install lamngockhuong/tap/termote
 termote start
 ```
 
-Установка через Homebrew обновляется через brew, а не `termote update`: `brew upgrade termote && termote restart`. Удаление: `termote uninstall && brew uninstall termote`.
 
 **Windows (PowerShell):**
 
 ```powershell
-irm https://termote.ohnice.app/install.ps1 | iex
 termote start
 ```
 
-**С помощью агента для кода:** вставьте промпт со страницы [Install with an agent](https://termote.ohnice.app/installation/agent/) в Claude Code, Codex или другой агент. Агент следует [`agents.md`](https://termote.ohnice.app/agents.md), проверяет, что сервер отвечает, и оставляет пароль вам.
+**С помощью агента для кода:** вставьте промпт со страницы [Install with an agent](https://github.com/tsuk1nose/termote) в Claude Code, Codex или другой агент. Агент следует [`agents.md`](https://github.com/tsuk1nose/termote), проверяет, что сервер отвечает, и оставляет пароль вам.
 
 Установщику нужны только `curl`, `tar` и `sha256sum`/`shasum` (в Windows — PowerShell), без sudo и прав администратора. Он проверяет контрольную сумму архива, устанавливает команду `termote` и ничего не запускает. `termote start` сохраняет параметры, при первом запуске создаёт пароль (выводится один раз и только в терминале; `termote show-password` покажет его снова), регистрирует службу и запускает её. Откройте `http://127.0.0.1:7680` (Windows: `http://127.0.0.1:7690`).
 
-Сначала должен быть установлен терминальный бэкенд: tmux (`sudo apt install tmux`, `brew install tmux`), psmux в Windows (`winget install psmux`) или [Herdr](https://termote.ohnice.app/installation/native/). Первый `start` сам определяет, какой из них использовать. [Zellij](https://zellij.dev/documentation/installation) 0.45.0 или новее (Linux, macOS) никогда не определяется автоматически: выберите его через `--mux zellij`. [herdr-core](https://herdr.dev/core/) (`hc` 0.1.16 или новее, любая ОС, только нативно) тоже не определяется: выберите его через `--mux hc`.
+Сначала должен быть установлен терминальный бэкенд: tmux (`sudo apt install tmux`, `brew install tmux`), psmux в Windows (`winget install psmux`) или [Herdr](https://github.com/tsuk1nose/termote). Первый `start` сам определяет, какой из них использовать. [Zellij](https://zellij.dev/documentation/installation) 0.45.0 или новее (Linux, macOS) никогда не определяется автоматически: выберите его через `--mux zellij`. [herdr-core](https://herdr.dev/core/) (`hc` 0.1.16 или новее, любая ОС, только нативно) тоже не определяется: выберите его через `--mux hc`.
 
 ### Основные параметры
 
@@ -203,7 +195,6 @@ termote url --qr                     # The link to open, as a QR code for a phon
 termote pair                         # A one-time code that signs a new device in
 termote devices                      # List the paired devices (devices revoke <id>)
 termote machine add <ssh alias>      # Reach another computer's Termote (Machines in the sidebar)
-termote update                       # Update to the latest release
 termote uninstall                    # Remove the service, the command, the install and uploads
 ```
 
@@ -214,15 +205,11 @@ termote uninstall                    # Remove the service, the command, the inst
 ### Фиксация версии
 
 ```bash
-curl -fsSL https://termote.ohnice.app/install.sh | TERMOTE_VERSION=1.0.0 sh
-termote update --version 1.0.0
 ```
 
 ```powershell
-$env:TERMOTE_VERSION='1.0.0'; irm https://termote.ohnice.app/install.ps1 | iex
 ```
 
-Без `TERMOTE_VERSION` установщик берёт самый новый стабильный релиз (1.0 или новее) и не трогает существующую установку. С этой переменной указанная версия ставится рядом с текущей и становится активной — так же можно восстановить сломанную установку. Предварительный релиз (`X.Y.Z-rc.N`) ставится, только если указать его так (или через `termote update --version`), и только после публикации; см. [Deployment Guide](../deployment-guide.md#pre-releases).
 
 ### Контейнерный режим
 
@@ -234,7 +221,6 @@ termote container logs -f
 termote container down
 ```
 
-`container up` запускает `ghcr.io/lamngockhuong/termote` той же версии, что и установленный `termote`, через podman (предпочтительно) или docker, на порту 7680 с `~/termote-workspace`, смонтированным в `/workspace`. Команда принимает `--port`, `--lan`, `--tailscale`, `--cloudflare`, `--no-auth`, `--mux`, `--allow-host`, `--allow-path`, `--user`, `--fresh`, `--workspace` и `--build` (только в рабочей копии); они сохраняются отдельно от параметров `start`, а имя пользователя и пароль общие с нативным сервером. Docker перезапускает контейнер после перезагрузки; у rootless Podman нет демона для этого, поэтому запускайте его как юнит Quadlet.
 
 > **Примечание по безопасности**: Не монтируйте `$HOME` напрямую — чувствительные каталоги, такие как `.ssh`, `.gnupg`, станут доступны в контейнере. Монтируйте только конкретные каталоги проектов.
 
@@ -244,12 +230,10 @@ termote container down
 # Generates a password: docker exec termote cat /home/termote/.config/termote/password
 docker run -d --name termote -p 7680:7680 \
   -v ~/projects:/workspace \
-  ghcr.io/lamngockhuong/termote:latest
 
 # With your own credentials
 docker run -d --name termote -p 7680:7680 \
   -e TERMOTE_USER=admin -e TERMOTE_PASS=secret \
-  ghcr.io/lamngockhuong/termote:latest
 ```
 
 | Переменная окружения | Описание                                                                                                                              |
@@ -261,17 +245,16 @@ docker run -d --name termote -p 7680:7680 \
 ### Сборка из исходного кода
 
 ```bash
-git clone https://github.com/lamngockhuong/termote.git
+git clone https://github.com/tsuk1nose/termote.git
 cd termote
 make build
 ./scripts/termote.sh start
 ```
 
-`make build` собирает PWA и встраивает его в `server/termote`; нужны Go, Node.js и pnpm. `scripts/termote.sh` (Windows: `scripts\termote.ps1`) работает только с рабочей копией репозитория: пересобирает бинарник для разработки, если какой-либо исходник новее, и запускает его с теми же аргументами. `termote update` отказывается работать в рабочей копии; используйте `git pull && make build`.
 
 ### Обновление с 0.x
 
-Обновления с 0.x нет: 1.0 устанавливается в другое место и не читает конфигурацию 0.x. Удалите 0.x, как описано в [архивной документации 0.x](https://termote.ohnice.app/0.x/), затем установите 1.0 командами выше.
+Обновления с 0.x нет: 1.0 устанавливается в другое место и не читает конфигурацию 0.x. Удалите 0.x, как описано в [архивной документации 0.x](https://github.com/tsuk1nose/termote), затем установите 1.0 командами выше.
 
 ## Режимы развёртывания
 

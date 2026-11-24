@@ -126,16 +126,8 @@ func homebrewPrefix(opt string) string {
 // `current` binary's update, or brew's upgrade then a restart. nil for a
 // container (its image comes from the host), a checkout or a binary copied
 // by hand.
+// updateSteps is disabled in this fork (local builds are updated from source).
 func (c *cli) updateSteps() [][]string {
-	if c.isInstalledRelease() {
-		return [][]string{{c.currentExe(), "update"}}
-	}
-	if opt, ok := c.homebrewOpt(); ok {
-		return [][]string{
-			{filepath.Join(homebrewPrefix(opt), "bin", "brew"), "upgrade", "termote"},
-			{homebrewBin(opt), "restart"},
-		}
-	}
 	return nil
 }
 

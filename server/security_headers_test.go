@@ -46,7 +46,7 @@ func TestContentSecurityPolicy(t *testing.T) {
 		// blob: is an image the page fetched itself (files/raw); data: a
 		// thumbnail drawn on a canvas.
 		"img-src 'self' data: blob:;",
-		"connect-src 'self' ws://box.local:7680 wss://box.local:7680 https://api.github.com;",
+		"connect-src 'self' ws://box.local:7680 wss://box.local:7680;",
 		"worker-src 'self'",
 		"object-src 'none'",
 		"frame-ancestors 'none'",
@@ -67,7 +67,7 @@ func TestContentSecurityPolicy(t *testing.T) {
 			t.Errorf("Host %q: %s", host, got)
 		}
 	}
-	if got := contentSecurityPolicy(nil, ""); !strings.Contains(got, "script-src 'self';") || !strings.Contains(got, "connect-src 'self' https://api.github.com;") {
+	if got := contentSecurityPolicy(nil, ""); !strings.Contains(got, "script-src 'self';") || !strings.Contains(got, "connect-src 'self';") {
 		t.Errorf("no scripts, no host: %s", got)
 	}
 }
