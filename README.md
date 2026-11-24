@@ -379,7 +379,9 @@ termote start --fresh      # If the saved password can no longer be read
 
 ## Security Notes
 
-- **Default: localhost only** - not exposed to LAN unless `--lan` flag used
+- **Fork supply-chain hardening**: auto-update checks (`api.github.com`), `termote update`, and pulling pre-built upstream binaries/container images are disabled in this fork. Merge audited upstream changes and rebuild locally from source (`make build`, `termote container up --build`).
+- **Explicit address binding**: use `--bind <ip[:port]>` (e.g. `127.0.0.1:7680,100.x.x.x:7680`) to expose only loopback and VPN/Tailscale interfaces instead of all interfaces (`--lan`).
+- **Default: localhost only** - not exposed to LAN unless `--lan` or `--bind` is used
 - **Basic auth enabled by default** - use `--no-auth` to disable for local dev; the password is created by the first `termote start` and saved encrypted
 - **Host allowlist**: requests with an unrecognised `Host` header are rejected (DNS-rebinding protection); add trusted names with `--allow-host`, there is no wildcard to turn the check off
 - **Origin/CSRF guards**: state-changing `/api/mux/*` requests and the `/api/mux/stream` WebSocket reject cross-site `Sec-Fetch-Site`/`Origin` and require a same-origin, single-use stream token
@@ -392,13 +394,9 @@ termote start --fresh      # If the saved password can no longer be read
 - Restrict to trusted networks/VPN
 - What a signed-in or paired device can do, and what to do when one is lost: [Security model](docs/security-model.md)
 
-## Other Projects
+## Upstream & Credits
 
-| Project                                                     | Description                                                                                                        |
-| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [GitHub Flex](https://github.com/lamngockhuong/github-flex) | A cross-browser extension (Chrome & Firefox) that enhances GitHub's interface with productivity features           |
-| [TabRest](https://github.com/lamngockhuong/tabrest)         | Chrome extension that automatically unloads inactive tabs to free memory                                           |
-| [Specpin](https://github.com/lamngockhuong/specpin)         | Pin living, Git-versioned business specs onto the elements of your running web UI (browser extension + Go sidecar) |
+This repository is a personal fork of [lamngockhuong/termote](https://github.com/lamngockhuong/termote) by [Lam Ngoc Khuong](https://github.com/lamngockhuong). Huge thanks to the upstream author for building and polishing Termote — this fork exists purely for local-build supply-chain hygiene and personal customizations (multi-address `--bind`, UTF-8 defaults, and mobile IME/viewport fixes).
 
 ## License
 
