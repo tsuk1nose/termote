@@ -24,7 +24,10 @@ Every agent modifying this repository or merging upstream changes **MUST** enfor
    - Multi-address bind (`--bind <ip[:port]>`, `--clear-bind`, `TERMOTE_BIND`) + Linux `IP_FREEBIND` / `IPV6_FREEBIND` (`server/bind*.go`, `serve.go`, `serve_config.go`, `cli_config.go`, `cli_start.go`, `cli_service.go`, `cli.go`).
    - UTF-8 locale fallback (`C.UTF-8`) in `terminalEnv()` and `serviceEnv()`, plus `tmux -u` on Unix (`server/pty_unix.go`, `server/mux_tmux.go`, `server/cli_service.go`).
    - Mobile PWA fixes: iOS WebKit non-composing full-width punctuation fallback and post-resize WebGL texture atlas refresh (`pwa/src/components/terminal-view.tsx`), plus Android Chrome `interactive-widget=resizes-content` and live `visualViewport.height` sizing (`pwa/index.html`, `pwa/src/hooks/use-keyboard-visible.ts`, `pwa/src/App.tsx`).
-5. **Changelog & Git Workflow**
+5. **No Upstream Remote Installer / Publishing Scripts**
+   - Do NOT keep upstream remote installer or publishing scripts (`scripts/install.sh`, `scripts/install.ps1`, `scripts/homebrew-formula.sh`, `scripts/termote-plugins.sh`) that download binaries from `lamngockhuong/termote`.
+   - For deploying to other hosts without a build toolchain, use `make dist` (builds an offline `dist/termote-<version>-<os>-<arch>.tar.gz` containing the static binary, `termote.sha256`, and `scripts/install-local.sh`) and copy via `scp`.
+6. **Changelog & Git Workflow**
    - Record local changes and upstream syncs at the top of `CHANGELOG.md`.
    - Commit locally only; do not push unless explicitly asked by the user.
 

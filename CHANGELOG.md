@@ -24,7 +24,8 @@ Synced with upstream `main` (through `v2.31.0` + `951fce49`) and reapplied local
 
 * disable PWA auto-update checks (`api.github.com`), remove `https://api.github.com` from server CSP, hide Settings Updates panel, and disable `termote update` CLI/task entrypoints to prevent overwriting local builds.
 * disable pulling pre-built upstream container images in `termote container up`; container mode now always builds locally from the checkout's `Dockerfile`.
-* document fork security and upstream-sync rules in `AGENTS.md` (`CLAUDE.md`).
+* remove upstream remote installer and publishing scripts (`scripts/install.sh`, `scripts/install.ps1`, `scripts/homebrew-formula.sh`, `scripts/termote-plugins.sh`); replace with offline `scripts/install-local.sh` and `make dist` (`tar.gz` bundle for `scp` deployment).
+* document fork security and upstream-sync rules in `AGENTS.md` (`CLAUDE.md` symlink).
 
 ## [2.31.0](https://github.com/lamngockhuong/termote/compare/v2.30.0...v2.31.0) (2026-11-21)
 

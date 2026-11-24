@@ -136,8 +136,21 @@ termote streams the terminal itself (PTY on Unix, ConPTY on Windows) into xterm.
 ```bash
 git clone https://github.com/tsuk1nose/termote.git
 cd termote
-make build
-./server/termote start
+make install-local
+termote start
+```
+
+**Offline bundle for other machines (`scp` deploy, no Go/Node needed on target):**
+
+```bash
+# On a build machine (supports cross-compile: GOOS=linux GOARCH=arm64)
+make dist VERSION=2.31.0-local
+scp dist/termote-2.31.0-local-linux-amd64.tar.gz user@target:/tmp/
+
+# On the target machine
+tar -xzf /tmp/termote-2.31.0-local-linux-amd64.tar.gz -C /tmp
+/tmp/termote-2.31.0-local-linux-amd64/install-local.sh
+termote start --bind 127.0.0.1:7680,100.x.x.x:7680
 ```
 
 A terminal backend must be installed first: tmux (`sudo apt install tmux`, `brew install tmux`), psmux on Windows (`winget install psmux`), Herdr, Zellij (`--mux zellij`), or herdr-core (`--mux hc`). Open `http://127.0.0.1:7680` (Windows: `http://127.0.0.1:7690`).

@@ -1,16 +1,22 @@
 # Termote Makefile
 # Usage: make <target>
 
-.PHONY: help build build-pwa build-api test test-go test-hc test-cli test-install test-homebrew-formula test-termote-plugins test-entrypoints test-herdr-plugin test-git-hooks test-site-installs start container-up container-down uninstall health clean release release-dry fmt fmt-check brand-assets llms claude-chat-tags codex-chat-items
+.PHONY: help build build-pwa build-api dist install-local test test-go test-hc test-cli test-entrypoints test-herdr-plugin test-git-hooks test-site-installs start container-up container-down uninstall health clean release release-dry fmt fmt-check brand-assets llms claude-chat-tags codex-chat-items
+
+VERSION ?= 2.31.0-local
+GOOS ?= $(shell go env GOOS)
+GOARCH ?= $(shell go env GOARCH)
 
 # Default target
 help:
 	@echo "Termote - Terminal Remote Control"
 	@echo ""
-	@echo "Build:"
+	@echo "Build & Package:"
 	@echo "  make build          Build PWA and server"
 	@echo "  make build-pwa      Build PWA only"
 	@echo "  make build-api      Build server (embeds the PWA)"
+	@echo "  make install-local  Build and install into ~/.local/share/termote"
+	@echo "  make dist           Build offline tar.gz bundle for scp deployment (GOOS=... GOARCH=... VERSION=...)"
 	@echo ""
 	@echo "Run:"
 	@echo "  make start          Start the server as a service (native)"
@@ -61,7 +67,28 @@ build-api: build-pwa
 	@echo "Building server..."
 	find server/webui/dist -mindepth 1 ! -name .gitkeep -delete
 	cp -R pwa/dist/. server/webui/dist/
-	cd server && CGO_ENABLED=0 go build -ldflags="-s -w" -o termote .
+	cd server && CGO_ENABLED=0 go build -ldflags="-s -w -X main.cliVersion=$(VERSION)" -o termote .
+
+# Install the locally built binary into ~/.local/share/termote and ~/.local/bin
+install-local: build
+	@chmod +x scripts/install-local.sh
+	@./scripts/install-local.sh
+
+# Build a self-contained offline tar.gz bundle (binary + sha256 + install-local.sh)
+# for scp deployment to target machines without Go/Node or internet access.
+dist: build-pwa
+	@echo "Packaging dist/termote-$(VERSION)-$(GOOS)-$(GOARCH).tar.gz ..."
+	find server/webui/dist -mindepth 1 ! -name .gitkeep -delete
+	cp -R pwa/dist/. server/webui/dist/
+	@rm -rf "dist/termote-$(VERSION)-$(GOOS)-$(GOARCH)"
+	@mkdir -p "dist/termote-$(VERSION)-$(GOOS)-$(GOARCH)/bin"
+	cd server && CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -ldflags="-s -w -X main.cliVersion=$(VERSION)" -o "../dist/termote-$(VERSION)-$(GOOS)-$(GOARCH)/bin/termote" .
+	@cp scripts/install-local.sh "dist/termote-$(VERSION)-$(GOOS)-$(GOARCH)/install-local.sh"
+	@chmod +x "dist/termote-$(VERSION)-$(GOOS)-$(GOARCH)/install-local.sh"
+	@cd "dist/termote-$(VERSION)-$(GOOS)-$(GOARCH)" && sha256sum bin/termote > termote.sha256
+	@tar -czf "dist/termote-$(VERSION)-$(GOOS)-$(GOARCH).tar.gz" -C dist "termote-$(VERSION)-$(GOOS)-$(GOARCH)"
+	@rm -rf "dist/termote-$(VERSION)-$(GOOS)-$(GOARCH)"
+	@ls -lh "dist/termote-$(VERSION)-$(GOOS)-$(GOARCH).tar.gz"
 
 # Run targets (through the checkout shim)
 start:
@@ -74,7 +101,7 @@ container-down:
 	./scripts/termote.sh container down
 
 # Test targets
-test: test-go test-cli test-install test-homebrew-formula test-termote-plugins test-entrypoints test-herdr-plugin test-git-hooks test-site-installs
+test: test-go test-cli test-entrypoints test-herdr-plugin test-git-hooks test-site-installs
 	@echo ""
 	@echo "All tests completed!"
 
