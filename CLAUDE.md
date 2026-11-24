@@ -1,6 +1,34 @@
-# CLAUDE.md
+# CLAUDE.md / AGENTS.md
 
-Instructions for Claude Code when working with this repository.
+Instructions for AI coding agents working with this fork (`tsuk1nose/termote`).
+
+## Fork Security & Maintenance Policy (MANDATORY)
+
+**Why this fork exists:** Termote is a niche, high-privilege remote shell / terminal control tool. To mitigate upstream supply-chain attacks or malicious releases, this fork allows **controlled, audited merges from upstream** (`lamngockhuong/termote`) followed by **local source builds only** — never automatic updates or blind pulls of upstream binaries/images.
+
+Every agent modifying this repository or merging upstream changes **MUST** enforce all of the following invariants:
+
+1. **No Auto-Update / No Upstream Release Checks**
+   - `pwa/src/hooks/use-update-check.ts`: must NOT make any network requests to `api.github.com` or any external host (`useUpdateCheck()` stays a no-op; `availableUpdate()` always returns `null`).
+   - `pwa/src/App.tsx`: do NOT render the Settings Updates section or any UI button that triggers `termote update`.
+   - `server/security_headers.go`: CSP `connect-src` must stay `'self'` (+ current host `ws://`/`wss://`); never allow `https://api.github.com` or other third-party hosts.
+   - `server/cli_update.go` & `server/cli_menu.go`: `termote update` must remain disabled (return an error instructing to pull and rebuild from source); do not show `Update` in the interactive menu.
+   - `server/install_layout.go`: `updateSteps()` must always return `nil` so no backend task can trigger self-updates.
+2. **Container Mode: Local Build Only (No Upstream Image Pulls)**
+   - `server/cli_container.go`: `termote container up` must ALWAYS build locally from this checkout's `Dockerfile` and refuse pulling pre-built upstream images (`ghcr.io/lamngockhuong/termote`), even if `--build=false` is passed or run outside a checkout.
+3. **Documentation & README Hygiene**
+   - Keep localized README translations organized under `docs/i18n/README.*.md`; keep only `README.md` at the repo root.
+   - Repository links and badges in `README.md` and `docs/i18n/README.*.md` must point to `tsuk1nose/termote` (while keeping attribution to upstream `lamngockhuong/termote`).
+   - Do NOT include upstream domain one-line installers (`termote.ohnice.app/install.sh`, `install.ps1`), upstream Homebrew taps (`brew install lamngockhuong/tap/termote`), upstream Docker/GHCR image pull commands, or `termote update` instructions.
+4. **Preserve Local Customizations on Upstream Sync**
+   - Multi-address bind (`--bind <ip[:port]>`, `--clear-bind`, `TERMOTE_BIND`) + Linux `IP_FREEBIND` / `IPV6_FREEBIND` (`server/bind*.go`, `serve.go`, `serve_config.go`, `cli_config.go`, `cli_start.go`, `cli_service.go`, `cli.go`).
+   - UTF-8 locale fallback (`C.UTF-8`) in `terminalEnv()` and `serviceEnv()`, plus `tmux -u` on Unix (`server/pty_unix.go`, `server/mux_tmux.go`, `server/cli_service.go`).
+   - Mobile PWA fixes: iOS WebKit non-composing full-width punctuation fallback and post-resize WebGL texture atlas refresh (`pwa/src/components/terminal-view.tsx`), plus Android Chrome `interactive-widget=resizes-content` and live `visualViewport.height` sizing (`pwa/index.html`, `pwa/src/hooks/use-keyboard-visible.ts`, `pwa/src/App.tsx`).
+5. **Changelog & Git Workflow**
+   - Record local changes and upstream syncs at the top of `CHANGELOG.md`.
+   - Commit locally only; do not push unless explicitly asked by the user.
+
+---
 
 ## Project Overview
 

@@ -23,6 +23,8 @@ Synced with upstream `main` (through `v2.31.0` + `951fce49`) and reapplied local
 ### Removed / Disabled
 
 * disable PWA auto-update checks (`api.github.com`), remove `https://api.github.com` from server CSP, hide Settings Updates panel, and disable `termote update` CLI/task entrypoints to prevent overwriting local builds.
+* disable pulling pre-built upstream container images in `termote container up`; container mode now always builds locally from the checkout's `Dockerfile`.
+* document fork security and upstream-sync rules in `AGENTS.md` (`CLAUDE.md`).
 
 ## [2.31.0](https://github.com/lamngockhuong/termote/compare/v2.30.0...v2.31.0) (2026-11-21)
 

@@ -303,11 +303,15 @@ func (c *cli) containerUp(args []string) error {
 	if rt == "" {
 		return errors.New("neither podman nor docker found; install one")
 	}
-	// A checkout builds unless --build=false asks for the published image.
-	build := o.build || (!set["build"] && c.isCheckout())
-	if build && !fileExists(filepath.Join(c.projectDir, "Dockerfile")) {
-		return errors.New("--build needs a git checkout (it builds the image from its Dockerfile)")
+	// Pulling pre-built upstream container images is disabled in this fork:
+	// always build locally from the checkout's Dockerfile.
+	if set["build"] && !o.build {
+		return errors.New("pulling upstream container images is disabled in this fork; build locally from a git checkout")
 	}
+	if !fileExists(filepath.Join(c.projectDir, "Dockerfile")) {
+		return errors.New("container mode in this fork requires a local git checkout with a Dockerfile (upstream image pulls are disabled)")
+	}
+	build := true
 	pass, reused, err := c.setupAuth(startOptions{noAuth: o.noAuth, fresh: o.fresh}, saved)
 	if err != nil {
 		return err
